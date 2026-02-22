@@ -1,144 +1,487 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="assets/ico/favicon.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lakshmi Sreedhar — Advocate at the High Court of Kerala. 9+ years of experience in Constitutional Law, Civil &amp; Criminal Litigation, Corporate Law, Property Due Diligence, and more.">
+  <meta name="author" content="Lakshmi Sreedhar">
+  <meta property="og:title" content="Lakshmi Sreedhar | Advocate, High Court of Kerala">
+  <meta property="og:description" content="Principled Practice. Strategic Outcomes. Independent advocate with 9+ years of litigation and advisory experience.">
+  <meta property="og:type" content="website">
 
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <title>Lakshmi Sreedhar | Advocate, High Court of Kerala</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
 
-
-    <title> Lakshmi Sreedhar </title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="assets/css/main.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/modernizr.custom.js"></script>
-
-
-
-    <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=EB+Garamond' rel='stylesheet' type='text/css'>
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="assets/js/html5shiv.js"></script>
-      <script src="assets/js/respond.min.js"></script>
-    <![endif]-->
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-42601089-4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-42601089-4');
+  </script>
 </head>
+<body>
 
-<body data-spy="scroll" data-offset="0" data-target="#theMenu">
+  <!-- =========================================
+       MOBILE OVERLAY MENU
+  ========================================== -->
+  <div id="nav-overlay" class="nav-overlay" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <a href="#about">About</a>
+    <a href="#practice">Practice Areas</a>
+    <a href="#commitment">Commitment</a>
+    <a href="#contact">Contact</a>
+    <a href="mailto:adv@lakshmisreedhar.com" class="btn btn--gold">Get in Touch</a>
+  </div>
 
-    <!-- Menu -->
-    <nav class="menu" id="theMenu">
-        <div class="menu-wrap">
-            <h1 class="logo"><a href="index.html#home">Menu</a></h1>
-            <i class="icon-remove menu-close"></i>
-            <a href="#home" class="smoothScroll">Home</a>
-            <a href="#contact" class="smoothScroll">Contact</a>
-            <a href="https://www.facebook.com/lakshmi.shiva.928"><i class="icon-facebook"></i></a>
-            <a href="https://twitter.com/lololikka"><i class="icon-twitter"></i></a>
-            <a href="mailto:adv@lakshmisreedhar.com"><i class="icon-envelope"></i></a>
-        </div>
+  <!-- =========================================
+       NAVIGATION
+  ========================================== -->
+  <header id="navbar" role="banner">
+    <div class="container">
+      <a href="#hero" class="nav-brand" aria-label="Lakshmi Sreedhar — home">
+        <span class="nav-brand__name">Lakshmi Sreedhar</span>
+        <span class="nav-brand__sub">Advocate</span>
+      </a>
 
-        <!-- Menu button -->
-        <div id="menuToggle"><i class="icon-reorder"></i></div>
-    </nav>
+      <nav class="nav-links" aria-label="Site navigation">
+        <a href="#about">About</a>
+        <a href="#practice">Practice Areas</a>
+        <a href="#commitment">Commitment</a>
+        <a href="#contact">Contact</a>
+        <a href="mailto:adv@lakshmisreedhar.com" class="btn btn--gold">Get in Touch</a>
+      </nav>
 
-
-
-    <!-- ========== HEADER SECTION ========== -->
-    <section id="home" name="home"></section>
-    <div id="headerwrap">
-        <div class="container">
-
-            <br>
-            <div class="row">
-                <h1>Lakshmi Sreedhar</h1>
-                <br>
-                <h3> Lawyer | Traveller </h3>
-                <br>
-                <br>
-                <div class="col-lg-6 col-lg-offset-3">
-                </div>
-            </div>
-        </div>
-        <!-- /container -->
+      <button
+        id="nav-toggle"
+        class="nav-toggle"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        aria-controls="nav-overlay"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
-    <!-- /headerwrap -->
+  </header>
 
-
-
-    <!-- 	<!-- ========== ABOUT SECTION ========== -->
-    <!-- <section id="about" name="about"></section>
-	<div id="f">
-		<div class="container">
-			<div class="row">
-				<h3>ABOUT ME</h3>
-				<p class="centered"><i class="icon icon-circle"></i><i class="icon icon-circle"></i><i class="icon icon-circle"></i></p> -->
-
-    <!-- INTRO INFORMATIO-->
-    <!-- 	<div class="col-lg-6 col-lg-offset-3">
-					<p>A full time theme crafter based in Madrid, Spain. I love designing beautiful, clean and user-friendly interfaces for websites.</p>
-					<p>My passion is turning good ideas and products into eye-catching sites.</p>
-					<p>Sometimes I blog about design and web trends. Also I share links and my thoughts on <a href="http://twitter.com/BlackTie_co">Twitter</a>. Need a free handsome bootstrap theme? <a href="http://blacktie.co">Done!</a></p>
-					<p>I'm available for freelance jobs. Contact me now.</p>
-				</div>								
-			</div> -->
-    <!-- </div>/container
-	</div> -->
-    <!-- /f -->
-    <!-- -->
-
-
-
-
-    <!-- ========== CONTACT SECTION ========== -->
-    <section id="contact" name="contact"></section>
-    <div id="f">
-        <div class="container">
-            <div class="row">
-                <h3>CONTACT ME</h3>
-                <p class="centered"><i class="icon icon-circle"></i><i class="icon icon-circle"></i><i class="icon icon-circle"></i></p>
-
-                <div class="col-lg-6 col-lg-offset-3">
-                    <p>1st Floor, Metro Plaza,<br/>Market Road, North End,<br/>Kochi-18, Kerala,<br/>India</p>
-                    <p>adv@lakshmisreedhar.com</p>
-                </div>
-            </div>
+  <!-- =========================================
+       HERO
+  ========================================== -->
+  <section id="hero" aria-label="Introduction">
+    <div class="hero__bg-pattern" aria-hidden="true"></div>
+    <div class="container">
+      <div class="hero__content">
+        <p class="hero__eyebrow">High Court of Kerala</p>
+        <h1 class="hero__headline">
+          Principled Practice.<br><em>Strategic Outcomes.</em>
+        </h1>
+        <div class="hero__divider" aria-hidden="true"></div>
+        <p class="hero__sub">
+          Advocate &middot; High Court of Kerala &middot; 9+ Years of Litigation and Advisory
+        </p>
+        <div class="hero__ctas">
+          <a href="#practice" class="btn btn--ghost">Explore Practice Areas</a>
+          <a href="mailto:adv@lakshmisreedhar.com" class="btn btn--gold">Schedule a Consultation</a>
         </div>
+      </div>
     </div>
+    <div class="hero__scroll" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 5v14M5 12l7 7 7-7"/>
+      </svg>
+      <span>Scroll</span>
+    </div>
+  </section>
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-42601089-4"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
+  <!-- =========================================
+       ABOUT
+  ========================================== -->
+  <section id="about" class="section" aria-labelledby="about-heading">
+    <div class="container">
+      <div class="about__grid">
 
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
+        <div class="about__text">
+          <span class="section-label">About</span>
+          <h2 id="about-heading" class="section-title">Independent Counsel.<br>Undivided Attention.</h2>
 
-        gtag('config', 'UA-42601089-4');
-    </script>
+          <p>
+            Lakshmi Sreedhar is an independent advocate based in Kochi, practising primarily before the
+            High Court of Kerala and the Supreme Court of India. A graduate of the National University of
+            Advanced Legal Studies (NUALS), Kochi, she has built a practice spanning constitutional
+            litigation, corporate advisory, property law, and public interest matters — earning a
+            reputation for meticulous preparation and principled advocacy.
+          </p>
+          <p>
+            With over nine years at the Bar, Lakshmi combines the agility of independent practice with
+            the depth of experience typically found at larger firms. Every client receives her direct
+            attention, from the first consultation through the final resolution.
+          </p>
 
+          <div class="about__credentials" aria-label="Credentials">
+            <span class="credential-tag">NUALS, Kochi</span>
+            <span class="credential-tag">High Court of Kerala</span>
+            <span class="credential-tag">Supreme Court of India</span>
+            <span class="credential-tag">9+ Years at the Bar</span>
+            <span class="credential-tag">Bar Council of Kerala</span>
+          </div>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="assets/js/classie.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/smoothscroll.js"></script>
-    <script src="assets/js/main.js"></script>
+        </div>
+
+        <div class="about__photo reveal" aria-label="Photo of Lakshmi Sreedhar">
+          <div class="about__photo-wrap">
+            <!-- Replace src with the actual photo: assets/img/lakshmi.jpg -->
+            <img
+              src="assets/img/lakshmi.jpg"
+              alt="Lakshmi Sreedhar, Advocate"
+              onload="this.closest('.about__photo-wrap').querySelector('.about__photo-placeholder').style.display='none'"
+              onerror="this.style.display='none'"
+            >
+            <div class="about__photo-placeholder" aria-hidden="true">
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="32" cy="20" r="12"/>
+                <path d="M6 56c0-14.36 11.64-26 26-26s26 11.64 26 26"/>
+              </svg>
+              <span>Photo Placeholder</span>
+            </div>
+          </div>
+          <div class="about__photo-accent" aria-hidden="true"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       PRACTICE AREAS
+  ========================================== -->
+  <section id="practice" class="section" aria-labelledby="practice-heading">
+    <div class="container">
+      <div class="practice__header">
+        <span class="section-label">Expertise</span>
+        <h2 id="practice-heading" class="section-title">Areas of Practice</h2>
+        <p>A broad litigation and advisory practice spanning constitutional, commercial, and regulatory matters across Kerala and the Supreme Court.</p>
+      </div>
+
+      <div class="practice__grid">
+
+        <article class="practice-card reveal">
+          <div class="practice-card__icon" aria-hidden="true"></div>
+          <h3 class="practice-card__title">Constitutional &amp; Administrative Law</h3>
+          <p class="practice-card__desc">Writ petitions, fundamental rights, judicial review, and challenges to state action.</p>
+        </article>
+
+        <article class="practice-card reveal reveal--delay-1">
+          <div class="practice-card__icon" aria-hidden="true"></div>
+          <h3 class="practice-card__title">Civil &amp; Criminal Litigation</h3>
+          <p class="practice-card__desc">Trial and appellate advocacy across civil disputes and criminal proceedings.</p>
+        </article>
+
+        <article class="practice-card reveal reveal--delay-2">
+          <div class="practice-card__icon" aria-hidden="true"></div>
+          <h3 class="practice-card__title">Corporate &amp; Commercial Law</h3>
+          <p class="practice-card__desc">Business advisory, contract drafting, commercial disputes, and regulatory compliance.</p>
+        </article>
+
+        <article class="practice-card reveal reveal--delay-3">
+          <div class="practice-card__icon" aria-hidden="true"></div>
+          <h3 class="practice-card__title">Land Laws &amp; Land Reforms</h3>
+          <p class="practice-card__desc">Kerala land reform statutes, tenancy rights, ceiling limits, and government land disputes.</p>
+        </article>
+
+        <article class="practice-card reveal">
+          <div class="practice-card__icon" aria-hidden="true"></div>
+          <h3 class="practice-card__title">Property Due Diligence &amp; Real Estate</h3>
+          <p class="practice-card__desc">Title verification, encumbrance search, and legal clearance for residential and commercial transactions.</p>
+        </article>
+
+        <article class="practice-card reveal reveal--delay-1">
+          <div class="practice-card__icon" aria-hidden="true"></div>
+          <h3 class="practice-card__title">Media Law</h3>
+          <p class="practice-card__desc">Press freedom, defamation, right to information, and digital content disputes.</p>
+        </article>
+
+        <article class="practice-card reveal reveal--delay-2">
+          <div class="practice-card__icon" aria-hidden="true"></div>
+          <h3 class="practice-card__title">Banking &amp; Financial Law</h3>
+          <p class="practice-card__desc">Recovery proceedings, DRT matters, loan disputes, and regulatory enforcement.</p>
+        </article>
+
+        <article class="practice-card reveal reveal--delay-3">
+          <div class="practice-card__icon" aria-hidden="true"></div>
+          <h3 class="practice-card__title">Intellectual Property</h3>
+          <p class="practice-card__desc">Trademark, copyright, and passing-off matters before courts and IP offices.</p>
+        </article>
+
+        <article class="practice-card reveal">
+          <div class="practice-card__icon" aria-hidden="true"></div>
+          <h3 class="practice-card__title">Local Governance &amp; Panchayat Law</h3>
+          <p class="practice-card__desc">Kerala Panchayati Raj, municipal governance, and local body disputes.</p>
+        </article>
+
+        <article class="practice-card reveal reveal--delay-1">
+          <div class="practice-card__icon" aria-hidden="true"></div>
+          <h3 class="practice-card__title">Electricity Law</h3>
+          <p class="practice-card__desc">Regulatory proceedings before KSEB, KSERC, and related disputes.</p>
+        </article>
+
+        <article class="practice-card reveal reveal--delay-2">
+          <div class="practice-card__icon" aria-hidden="true"></div>
+          <h3 class="practice-card__title">Taxation &amp; Insurance</h3>
+          <p class="practice-card__desc">Tax disputes, assessment challenges, and insurance claim litigation.</p>
+        </article>
+
+        <article class="practice-card reveal reveal--delay-3">
+          <div class="practice-card__icon" aria-hidden="true"></div>
+          <h3 class="practice-card__title">ADR — Arbitration &amp; Mediation</h3>
+          <p class="practice-card__desc">Efficient resolution of commercial and civil disputes outside litigation.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       SPOTLIGHT — PROPERTY & REAL ESTATE
+  ========================================== -->
+  <section id="spotlight" aria-labelledby="spotlight-heading">
+    <div class="container">
+      <div class="spotlight__inner">
+
+        <div class="reveal">
+          <span class="spotlight__label">Regional Specialisation</span>
+          <h2 id="spotlight-heading" class="spotlight__title">
+            Property &amp; Real Estate<br>Due Diligence in Kerala
+          </h2>
+          <p class="spotlight__body">
+            Navigating property transactions in Kerala requires nuanced knowledge of
+            regional land laws, local body records, and district-level revenue documentation.
+            With deep familiarity across key districts, Lakshmi provides thorough title
+            verification and legal clearance that protects buyers, sellers, and developers
+            from undisclosed encumbrances and litigation risk.
+          </p>
+          <div class="spotlight__regions" aria-label="Districts covered">
+            <span class="region-tag">Idukki</span>
+            <span class="region-tag">Ernakulam</span>
+            <span class="region-tag">Kasaragod</span>
+            <span class="region-tag">Thrissur</span>
+            <span class="region-tag">Thiruvananthapuram</span>
+          </div>
+          <a href="#contact" class="btn btn--gold">Enquire About Due Diligence</a>
+        </div>
+
+        <div class="spotlight__stats reveal reveal--delay-2" aria-label="Practice highlights">
+          <div class="stat">
+            <div class="stat__num">9<span style="font-size:1.5rem">+</span></div>
+            <div class="stat__label">Years at the Bar</div>
+          </div>
+          <div class="stat">
+            <div class="stat__num">2</div>
+            <div class="stat__label">Courts of Practice</div>
+          </div>
+          <div class="stat">
+            <div class="stat__num">12</div>
+            <div class="stat__label">Practice Areas</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       COMMITMENT
+  ========================================== -->
+  <section id="commitment" class="section" aria-labelledby="commitment-heading">
+    <div class="container">
+      <div class="commitment__header">
+        <span class="section-label">Values in Action</span>
+        <h2 id="commitment-heading" class="section-title">Beyond the Brief</h2>
+        <p>Advocacy is not only what happens in courtrooms. These are some of the causes that shape the practice.</p>
+      </div>
+
+      <div class="commitment__grid">
+
+        <article class="commitment-card reveal">
+          <div class="commitment-card__number" aria-hidden="true">01</div>
+          <h3 class="commitment-card__title">Pro Bono &amp; Child Rights</h3>
+          <p class="commitment-card__body">
+            Active engagement with <strong>Bachpan Bachao Andolan</strong> and allied organisations,
+            providing legal support to children and families navigating issues of child labour,
+            trafficking, and access to education. Law must serve those who cannot afford it most.
+          </p>
+        </article>
+
+        <article class="commitment-card reveal reveal--delay-1">
+          <div class="commitment-card__number" aria-hidden="true">02</div>
+          <h3 class="commitment-card__title">Solidarity Circle</h3>
+          <p class="commitment-card__body">
+            Co-architect of a <strong>survivor-centric legal support platform</strong> connecting
+            survivors of gender-based violence with legal aid, procedural guidance, and
+            rights-based counselling — grounded in dignity and confidentiality.
+          </p>
+        </article>
+
+        <article class="commitment-card reveal reveal--delay-2">
+          <div class="commitment-card__number" aria-hidden="true">03</div>
+          <h3 class="commitment-card__title">POSH &amp; Gender Justice</h3>
+          <p class="commitment-card__body">
+            Speaker and panelist on workplace sexual harassment prevention, POSH compliance,
+            and gender equity in professional spaces. Advises organisations on establishing
+            Internal Committees and building accountable workplace cultures.
+          </p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       CALL TO ACTION
+  ========================================== -->
+  <section id="cta" aria-label="Call to action">
+    <div class="container">
+      <div class="cta__inner">
+        <h2 class="cta__headline">Facing a complex legal matter?</h2>
+        <p class="cta__sub">Independent practice. Undivided attention.</p>
+        <a href="#contact" class="btn btn--ghost-navy">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       CONTACT & FOOTER
+  ========================================== -->
+  <section id="contact" class="section" aria-labelledby="contact-heading">
+    <div class="container">
+
+      <div class="contact__grid">
+
+        <div>
+          <h2 id="contact-heading" class="contact__heading">
+            Let's talk about<br>your matter.
+          </h2>
+          <p class="contact__sub">
+            Reach out for an initial consultation. All enquiries are treated with
+            strict confidentiality.
+          </p>
+
+          <div class="contact__items">
+
+            <div class="contact__item">
+              <div class="contact__item-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </div>
+              <div class="contact__item-content">
+                <div class="contact__item-label">Email</div>
+                <div class="contact__item-value">
+                  <a href="mailto:adv@lakshmisreedhar.com">adv@lakshmisreedhar.com</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact__item">
+              <div class="contact__item-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <div class="contact__item-content">
+                <div class="contact__item-label">Office</div>
+                <div class="contact__item-value">
+                  1st Floor, Metro Plaza<br>
+                  Market Road, North End<br>
+                  Kochi&ndash;18, Kerala, India
+                </div>
+              </div>
+            </div>
+
+            <div class="contact__item">
+              <div class="contact__item-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2z"/>
+                </svg>
+              </div>
+              <div class="contact__item-content">
+                <div class="contact__item-label">Phone</div>
+                <div class="contact__item-value">
+                  <a href="tel:+918129948577">+91 81299 48577</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact__item">
+              <div class="contact__item-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                </svg>
+              </div>
+              <div class="contact__item-content">
+                <div class="contact__item-label">WhatsApp</div>
+                <div class="contact__item-value">
+                  <a href="https://wa.me/918129948577" target="_blank" rel="noopener noreferrer">Message on WhatsApp</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact__item">
+              <div class="contact__item-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                  <rect x="2" y="9" width="4" height="12"/>
+                  <circle cx="4" cy="4" r="2"/>
+                </svg>
+              </div>
+              <div class="contact__item-content">
+                <div class="contact__item-label">LinkedIn</div>
+                <div class="contact__item-value">
+                  <a href="https://www.linkedin.com/in/lakshmisreedhar" target="_blank" rel="noopener noreferrer">linkedin.com/in/lakshmisreedhar</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="contact__cta-panel">
+          <h3>Ready to proceed?</h3>
+          <p>
+            Send a brief note about your matter and preferred time to connect.
+            Initial consultations are available in-person at the Kochi office
+            or by video call.
+          </p>
+          <a href="mailto:adv@lakshmisreedhar.com?subject=Consultation%20Request" class="btn btn--gold">
+            Email for a Consultation
+          </a>
+          <a href="tel:+918129948577" class="btn btn--outline-gold">
+            Call Now
+          </a>
+          <a href="https://wa.me/918129948577" target="_blank" rel="noopener noreferrer" class="btn btn--whatsapp">
+            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+            WhatsApp
+          </a>
+        </div>
+
+      </div>
+
+      <footer class="contact__footer">
+        <p class="contact__copyright">&copy; 2025 Lakshmi Sreedhar. All rights reserved.</p>
+        <p class="contact__bar-note">Enrolled with the Bar Council of Kerala &middot; Bar Council of India</p>
+      </footer>
+
+    </div>
+  </section>
+
+  <!-- Scripts -->
+  <script src="assets/js/main.js"></script>
+
 </body>
-
 </html>
