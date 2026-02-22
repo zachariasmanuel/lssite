@@ -1141,7 +1141,7 @@ details[open] .faq__question::after {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px;
+  padding: 16px;
 }
 
 .disclaimer-overlay.is-hidden {
@@ -1151,76 +1151,98 @@ details[open] .faq__question::after {
 .disclaimer-modal {
   background: var(--white);
   border-radius: var(--radius-lg);
-  padding: 48px 44px;
   max-width: 640px;
   width: 100%;
-  max-height: 90vh;
-  overflow-y: auto;
+  /* Fill available height minus overlay padding */
+  max-height: calc(100dvh - 32px);
+  display: flex;
+  flex-direction: column;
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.3);
   border-top: 4px solid var(--sage);
+  overflow: hidden;
+}
+
+/* Scrollable content area */
+.disclaimer-modal__content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 36px 36px 24px;
+  -webkit-overflow-scrolling: touch;
 }
 
 .disclaimer-modal__title {
   font-family: var(--font-serif);
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-size: clamp(1.4rem, 5vw, 2.2rem);
   font-weight: 600;
   color: var(--charcoal);
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   line-height: 1.2;
 }
 
 .disclaimer-modal__body {
   font-family: var(--font-sans);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: var(--charcoal);
-  line-height: 1.75;
-  margin-bottom: 20px;
+  line-height: 1.7;
+  margin-bottom: 16px;
   opacity: 0.85;
 }
 
 .disclaimer-modal__list {
   list-style: disc;
   padding-left: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .disclaimer-modal__list li {
   font-family: var(--font-sans);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: var(--charcoal);
-  line-height: 1.75;
+  line-height: 1.7;
   opacity: 0.85;
 }
 
+/* Sticky button footer */
+.disclaimer-modal__footer {
+  flex-shrink: 0;
+  padding: 16px 36px 28px;
+  border-top: 1px solid var(--border);
+  background: var(--white);
+}
+
 .disclaimer-modal__btn {
-  display: inline-block;
+  display: block;
+  width: 100%;
   font-family: var(--font-sans);
   font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  padding: 14px 36px;
+  padding: 15px 36px;
   border-radius: 100px;
   background: var(--sage);
   color: var(--white);
   border: none;
   cursor: pointer;
   transition: all var(--transition);
-  margin-top: 8px;
+  text-align: center;
 }
 
 .disclaimer-modal__btn:hover {
   background: var(--sage-dark);
-  transform: translateY(-1px);
   box-shadow: 0 6px 20px rgba(107, 143, 114, 0.35);
 }
 
 @media (max-width: 480px) {
-  .disclaimer-modal {
-    padding: 32px 24px;
+  .disclaimer-modal__content {
+    padding: 28px 20px 16px;
+  }
+
+  .disclaimer-modal__footer {
+    padding: 14px 20px 20px;
   }
 }
 

@@ -8,9 +8,31 @@
   /* ── Bar Council Disclaimer Modal ── */
   var disclaimerOverlay = document.getElementById('disclaimer-overlay');
   var disclaimerBtn = document.getElementById('disclaimer-agree');
+  var disclaimerContent = document.getElementById('disclaimer-content');
 
   if (disclaimerBtn && disclaimerOverlay) {
     document.body.style.overflow = 'hidden';
+
+    // Auto-scroll content slowly after 2 seconds
+    if (disclaimerContent) {
+      var autoScrolling = true;
+
+      // Stop auto-scroll when user touches or interacts with the content
+      disclaimerContent.addEventListener('touchstart', function () { autoScrolling = false; }, { passive: true });
+      disclaimerContent.addEventListener('mousedown', function () { autoScrolling = false; });
+      disclaimerContent.addEventListener('wheel', function () { autoScrolling = false; }, { passive: true });
+
+      setTimeout(function () {
+        function step() {
+          if (!autoScrolling) return;
+          var atBottom = disclaimerContent.scrollTop + disclaimerContent.clientHeight >= disclaimerContent.scrollHeight - 2;
+          if (atBottom) return;
+          disclaimerContent.scrollTop += 0.5;
+          requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }, 2000);
+    }
 
     disclaimerBtn.addEventListener('click', function () {
       disclaimerOverlay.classList.add('is-hidden');
