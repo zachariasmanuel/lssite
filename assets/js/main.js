@@ -5,6 +5,19 @@
 (function () {
   'use strict';
 
+  /* ── Bar Council Disclaimer Modal ── */
+  var disclaimerOverlay = document.getElementById('disclaimer-overlay');
+  var disclaimerBtn = document.getElementById('disclaimer-agree');
+
+  if (disclaimerBtn && disclaimerOverlay) {
+    document.body.style.overflow = 'hidden';
+
+    disclaimerBtn.addEventListener('click', function () {
+      disclaimerOverlay.classList.add('is-hidden');
+      document.body.style.overflow = '';
+    });
+  }
+
   /* ── Sticky Nav ── */
   const navbar = document.getElementById('navbar');
 
