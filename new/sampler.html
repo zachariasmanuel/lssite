@@ -1,0 +1,2132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Theme Sampler &middot; Lakshmi Sreedhar</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=Inter:wght@300;400;500;600;700&family=Inter+Tight:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..600,0..100;1,9..144,300..600,0..100&family=DM+Sans:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap">
+
+  <style>
+    /* ─── Shared resets ─────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      background: #111;
+      color: #fff;
+    }
+    img { max-width: 100%; display: block; }
+    button, textarea { font: inherit; color: inherit; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── Sticky jump bar ───────────────────────── */
+    .jumpbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(15,15,15,0.94);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 10px 22px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      flex-wrap: wrap;
+    }
+    .jumpbar__title {
+      font-weight: 600;
+      color: #fff;
+      margin-right: auto;
+      letter-spacing: 0.1em;
+    }
+    .jumpbar__title em {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      letter-spacing: 0;
+      text-transform: none;
+      color: #d4a24c;
+      margin-left: 6px;
+    }
+    .jumpbar__numbers {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .jumpbar a {
+      padding: 4px 8px;
+      min-width: 30px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 4px;
+      transition: all 0.18s ease;
+      font-size: 0.72rem;
+    }
+    .jumpbar a:hover {
+      border-color: rgba(255,255,255,0.55);
+      color: #fff;
+      background: rgba(255,255,255,0.06);
+    }
+
+    /* ─── Generic mock layout ───────────────────── */
+    .theme {
+      min-height: 100vh;
+      padding: 72px 56px 88px;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+      position: relative;
+    }
+
+    .theme__topline {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 24px;
+      padding-bottom: 24px;
+      margin-bottom: 56px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .theme__num {
+      font-family: var(--font-display);
+      font-size: 5rem;
+      font-weight: 400;
+      line-height: 1;
+      color: var(--accent);
+      letter-spacing: -0.04em;
+    }
+
+    .theme__name-block { text-align: right; }
+
+    .theme__name {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1;
+      letter-spacing: -0.01em;
+    }
+
+    .theme__name em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .theme__mood {
+      margin-top: 8px;
+      font-size: 0.74rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+    }
+
+    /* Palette swatches */
+    .palette {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-bottom: 64px;
+    }
+
+    .swatch {
+      border: 1px solid var(--rule);
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background: var(--surface);
+    }
+
+    .swatch__chip {
+      width: 100%;
+      aspect-ratio: 3/1;
+      border: 1px solid var(--rule);
+    }
+
+    .swatch__label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--ink-mute);
+    }
+
+    .swatch__hex {
+      font-family: 'Inter', monospace;
+      font-size: 0.85rem;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+    }
+
+    /* Hero mock */
+    .mock {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .mock__hero {
+      max-width: 640px;
+    }
+
+    .mock__eyebrow {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .mock__eyebrow::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .mock__headline {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 4.4vw, 4.2rem);
+      font-weight: 400;
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 24px;
+    }
+
+    .mock__headline em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .mock__sub {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1.15rem;
+      color: var(--ink-soft);
+      max-width: 36ch;
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+
+    /* Query box mock */
+    .qbox {
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      padding: 4px;
+      max-width: 520px;
+      margin-bottom: 36px;
+    }
+
+    .qbox__input {
+      width: 100%;
+      min-height: 76px;
+      background: transparent;
+      border: none;
+      outline: none;
+      resize: none;
+      padding: 14px 14px 6px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    .qbox__input::placeholder {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--ink-mute);
+      opacity: 0.85;
+    }
+
+    .qbox__row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 8px 12px 6px;
+      border-top: 1px solid var(--rule);
+    }
+
+    .qbox__hint {
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 11px 22px;
+      cursor: pointer;
+      border: 1px solid var(--btn-bg);
+      background: var(--btn-bg);
+      color: var(--btn-fg);
+      transition: all 0.25s ease;
+      border-radius: var(--btn-radius, 0);
+    }
+
+    .btn:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--surface);
+    }
+
+    .btn--ghost {
+      background: transparent;
+      color: var(--ink);
+      border-color: var(--ink);
+    }
+
+    .btn--ghost:hover {
+      background: var(--ink);
+      color: var(--bg);
+    }
+
+    /* Practice excerpt */
+    .practice-excerpt {
+      border-top: 1px solid var(--rule);
+    }
+
+    .practice-excerpt__label {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      padding-top: 18px;
+      margin-bottom: 8px;
+    }
+
+    .practice-excerpt__item {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 14px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--rule);
+      align-items: baseline;
+    }
+
+    .practice-excerpt__num {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--accent);
+    }
+
+    .practice-excerpt__title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 3px;
+    }
+
+    .practice-excerpt__desc {
+      font-size: 0.84rem;
+      color: var(--ink-soft);
+      line-height: 1.5;
+    }
+
+    .cta-row {
+      margin-top: 36px;
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    /* ════════════════════════════════════════════
+       THEME 01 — QUIET AUTHORITY
+       ═════════════════════════════════════════════ */
+    .theme-1 {
+      --bg:        #F7F4ED;
+      --surface:   #FFFFFF;
+      --ink:       #0E1A2B;
+      --ink-soft:  #46556A;
+      --ink-mute:  #8a93a1;
+      --accent:    #B68C4E;
+      --rule:      #D9D2C2;
+      --btn-bg:    #0E1A2B;
+      --btn-fg:    #F7F4ED;
+      --btn-radius: 0;
+      --font-display: 'Newsreader', Georgia, serif;
+      --font-body:    'Inter', system-ui, sans-serif;
+    }
+
+    /* ════════════════════════════════════════════
+       THEME 02 — MODERN MINIMAL
+       ═════════════════════════════════════════════ */
+    .theme-2 {
+      --bg:        #FFFFFF;
+      --surface:   #F5F5F4;
+      --ink:       #0A0A0A;
+      --ink-soft:  #525252;
+      --ink-mute:  #a3a3a3;
+      --accent:    #2D6A4F;
+      --rule:      #E5E5E5;
+      --btn-bg:    #0A0A0A;
+      --btn-fg:    #FFFFFF;
+      --btn-radius: 6px;
+      --font-display: 'Instrument Serif', Georgia, serif;
+      --font-body:    'Inter Tight', system-ui, sans-serif;
+    }
+
+    .theme-2 .mock__headline { font-weight: 400; letter-spacing: -0.03em; }
+    .theme-2 .mock__headline em { font-style: italic; }
+
+    /* ════════════════════════════════════════════
+       THEME 03 — PREMIUM DARK
+       ═════════════════════════════════════════════ */
+    .theme-3 {
+      --bg:        #141414;
+      --surface:   #1E1E1E;
+      --ink:       #F2EDE2;
+      --ink-soft:  #B8B0A3;
+      --ink-mute:  #6f6960;
+      --accent:    #D4A24C;
+      --rule:      #2A2A2A;
+      --btn-bg:    #D4A24C;
+      --btn-fg:    #141414;
+      --btn-radius: 0;
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body:    'Inter Tight', system-ui, sans-serif;
+    }
+
+    .theme-3 .swatch__chip { border-color: rgba(255,255,255,0.12); }
+    .theme-3 .swatch { background: #1A1A1A; }
+    .theme-3 .btn:hover {
+      background: #F2EDE2;
+      color: #141414;
+      border-color: #F2EDE2;
+    }
+
+    /* ════════════════════════════════════════════
+       THEME 04 — COASTAL KERALA
+       ═════════════════════════════════════════════ */
+    .theme-4 {
+      --bg:        #F4EFE3;
+      --surface:   #FFFFFF;
+      --ink:       #1B2A2B;
+      --ink-soft:  #4E6566;
+      --ink-mute:  #8a9697;
+      --accent:    #0E5C5C;
+      --accent-2:  #C0613B;
+      --rule:      #D9D0BD;
+      --btn-bg:    #C0613B;
+      --btn-fg:    #FFFFFF;
+      --btn-radius: 100px;
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body:    'DM Sans', system-ui, sans-serif;
+    }
+
+    .theme-4 .mock__eyebrow { color: var(--accent-2); }
+    .theme-4 .mock__eyebrow::before { background: var(--accent-2); }
+    .theme-4 .mock__headline em {
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-color: var(--accent-2);
+      text-decoration-thickness: 2px;
+      text-underline-offset: 8px;
+    }
+    .theme-4 .btn:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* ════════════════════════════════════════════
+       THEME 05 — EDITORIAL CRIMSON
+       ═════════════════════════════════════════════ */
+    .theme-5 {
+      --bg:        #FFFFFF;
+      --surface:   #FAFAF7;
+      --ink:       #111111;
+      --ink-soft:  #4A4A4A;
+      --ink-mute:  #9a9a9a;
+      --accent:    #B0282A;
+      --rule:      #E2E2DC;
+      --btn-bg:    #B0282A;
+      --btn-fg:    #FFFFFF;
+      --btn-radius: 0;
+      --font-display: 'Newsreader', Georgia, serif;
+      --font-body:    'Inter', system-ui, sans-serif;
+    }
+    .theme-5 .mock__headline { font-weight: 500; }
+    .theme-5 .theme__num { font-style: italic; }
+
+    /* ════════════════════════════════════════════
+       THEME 06 — SEPIA ARCHIVE
+       ═════════════════════════════════════════════ */
+    .theme-6 {
+      --bg:        #EDE3CC;
+      --surface:   #F6EFDC;
+      --ink:       #2A1E10;
+      --ink-soft:  #5A4630;
+      --ink-mute:  #8a7656;
+      --accent:    #7A3B1A;
+      --rule:      #C9B98E;
+      --btn-bg:    #2A1E10;
+      --btn-fg:    #EDE3CC;
+      --btn-radius: 0;
+      --font-display: 'EB Garamond', Georgia, serif;
+      --font-body:    'EB Garamond', Georgia, serif;
+    }
+    .theme-6 .mock__headline { font-style: italic; font-weight: 500; }
+    .theme-6 .qbox__input,
+    .theme-6 .mock__sub { font-family: 'EB Garamond', serif; font-size: 1.1rem; }
+    .theme-6 .swatch__hex,
+    .theme-6 .swatch__label,
+    .theme-6 .practice-excerpt__desc,
+    .theme-6 .qbox__hint,
+    .theme-6 .practice-excerpt__label,
+    .theme-6 .theme__mood,
+    .theme-6 .mock__eyebrow { font-family: 'Inter', sans-serif; }
+
+    /* ════════════════════════════════════════════
+       THEME 07 — ARCHITECT'S MARK
+       ═════════════════════════════════════════════ */
+    .theme-7 {
+      --bg:        #ECEDEE;
+      --surface:   #FFFFFF;
+      --ink:       #14181B;
+      --ink-soft:  #4D5358;
+      --ink-mute:  #8a9097;
+      --accent:    #1E50FF;
+      --rule:      #CFD3D7;
+      --btn-bg:    #14181B;
+      --btn-fg:    #FFFFFF;
+      --btn-radius: 0;
+      --font-display: 'Inter Tight', system-ui, sans-serif;
+      --font-body:    'Inter', system-ui, sans-serif;
+    }
+    .theme-7 .mock__headline {
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 0.98;
+      text-transform: none;
+    }
+    .theme-7 .mock__headline em {
+      font-style: normal;
+      color: var(--accent);
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 400;
+      font-size: 0.85em;
+    }
+    .theme-7 .mock__sub { font-style: normal; font-family: 'Inter', sans-serif; }
+    .theme-7 .theme__num,
+    .theme-7 .theme__name {
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 400;
+    }
+    .theme-7 .theme__name em { font-style: normal; }
+    .theme-7 .practice-excerpt__num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-style: normal;
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+    }
+    .theme-7 .practice-excerpt__title { font-family: 'Inter Tight', sans-serif; font-weight: 500; }
+    .theme-7 .qbox__input::placeholder { font-family: 'Inter', sans-serif; font-style: normal; font-size: 0.95rem; }
+
+    /* ════════════════════════════════════════════
+       THEME 08 — ROYAL AUBERGINE
+       ═════════════════════════════════════════════ */
+    .theme-8 {
+      --bg:        #FBF6EF;
+      --surface:   #FFFFFF;
+      --ink:       #2E1F35;
+      --ink-soft:  #5A4263;
+      --ink-mute:  #8a7d8f;
+      --accent:    #5C2A4F;
+      --accent-2:  #B89968;
+      --rule:      #E2D7C3;
+      --btn-bg:    #5C2A4F;
+      --btn-fg:    #FBF6EF;
+      --btn-radius: 0;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'Inter', system-ui, sans-serif;
+    }
+    .theme-8 .mock__headline {
+      font-weight: 400;
+      letter-spacing: -0.005em;
+    }
+    .theme-8 .mock__headline em {
+      color: var(--accent);
+      font-weight: 500;
+      text-decoration: underline;
+      text-decoration-color: var(--accent-2);
+      text-decoration-thickness: 1.5px;
+      text-underline-offset: 10px;
+    }
+    .theme-8 .theme__num { color: var(--accent-2); font-style: italic; }
+    .theme-8 .mock__eyebrow { color: var(--accent-2); }
+    .theme-8 .mock__eyebrow::before { background: var(--accent-2); }
+    .theme-8 .btn:hover { background: var(--accent-2); border-color: var(--accent-2); color: #2E1F35; }
+
+    /* ════════════════════════════════════════════
+       THEME 09 — SAND & OLIVE
+       ═════════════════════════════════════════════ */
+    .theme-9 {
+      --bg:        #E8DEC5;
+      --surface:   #F2EAD4;
+      --ink:       #2B2A1C;
+      --ink-soft:  #595539;
+      --ink-mute:  #8a8462;
+      --accent:    #4C5A2C;
+      --accent-2:  #B85A1E;
+      --rule:      #C9BD93;
+      --btn-bg:    #4C5A2C;
+      --btn-fg:    #F2EAD4;
+      --btn-radius: 0;
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body:    'DM Sans', system-ui, sans-serif;
+    }
+    .theme-9 .mock__headline em { color: var(--accent-2); }
+    .theme-9 .theme__num { color: var(--accent-2); }
+    .theme-9 .btn:hover { background: var(--accent-2); border-color: var(--accent-2); }
+    .theme-9 .practice-excerpt__num { color: var(--accent-2); }
+
+    /* ════════════════════════════════════════════
+       THEME 10 — BRUTALIST MONO
+       ═════════════════════════════════════════════ */
+    .theme-10 {
+      --bg:        #0A0A0A;
+      --surface:   #161616;
+      --ink:       #FFFFFF;
+      --ink-soft:  #B5B5B5;
+      --ink-mute:  #5a5a5a;
+      --accent:    #D0FF3E;
+      --rule:      #262626;
+      --btn-bg:    #D0FF3E;
+      --btn-fg:    #0A0A0A;
+      --btn-radius: 0;
+      --font-display: 'Space Grotesk', system-ui, sans-serif;
+      --font-body:    'Inter', system-ui, sans-serif;
+    }
+    .theme-10 .theme__num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 6rem;
+      letter-spacing: -0.06em;
+    }
+    .theme-10 .theme__name { font-family: 'Space Grotesk', sans-serif; font-weight: 600; letter-spacing: -0.02em; }
+    .theme-10 .theme__name em { font-style: normal; color: var(--accent); }
+    .theme-10 .mock__headline {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+      text-transform: uppercase;
+      font-size: clamp(2.6rem, 5.4vw, 5rem);
+    }
+    .theme-10 .mock__headline em { font-style: normal; color: var(--accent); }
+    .theme-10 .mock__sub { font-family: 'Inter', sans-serif; font-style: normal; }
+    .theme-10 .mock__eyebrow { color: var(--accent); }
+    .theme-10 .mock__eyebrow::before { background: var(--accent); }
+    .theme-10 .swatch { background: #161616; }
+    .theme-10 .swatch__chip { border-color: rgba(255,255,255,0.1); }
+    .theme-10 .practice-excerpt__num { font-family: 'Space Grotesk', sans-serif; font-style: normal; font-weight: 600; }
+    .theme-10 .practice-excerpt__title { font-family: 'Space Grotesk', sans-serif; font-weight: 500; text-transform: uppercase; letter-spacing: 0.01em; font-size: 1rem; }
+    .theme-10 .btn { font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
+    .theme-10 .btn:hover { background: #FFFFFF; border-color: #FFFFFF; color: #0A0A0A; }
+    .theme-10 .btn--ghost { color: var(--ink); border-color: var(--ink); }
+    .theme-10 .btn--ghost:hover { background: var(--ink); color: var(--bg); }
+
+    /* ════════════════════════════════════════════
+       THEME 11 — MUGHAL MANUSCRIPT
+       ═════════════════════════════════════════════ */
+    .theme-11 {
+      --bg:        #FBF1E0;
+      --surface:   #FFFFFF;
+      --ink:       #1F1736;
+      --ink-soft:  #4A3F66;
+      --ink-mute:  #8a7f9c;
+      --accent:    #C45A2C;
+      --accent-2:  #8C1E2E;
+      --rule:      #E5D6B6;
+      --btn-bg:    #1F1736;
+      --btn-fg:    #FBF1E0;
+      --btn-radius: 0;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'DM Sans', system-ui, sans-serif;
+    }
+    .theme-11 .theme__num { color: var(--accent); font-style: italic; }
+    .theme-11 .mock__headline em { color: var(--accent-2); font-style: italic; }
+    .theme-11 .btn:hover { background: var(--accent); border-color: var(--accent); }
+
+    /* ════════════════════════════════════════════
+       THEME 12 — MARBLE & BLACK
+       ═════════════════════════════════════════════ */
+    .theme-12 {
+      --bg:        #F5F2EE;
+      --surface:   #FFFFFF;
+      --ink:       #0F0F0F;
+      --ink-soft:  #4A4A4A;
+      --ink-mute:  #9a9a96;
+      --accent:    #8C7A52;
+      --rule:      #D7D2CB;
+      --btn-bg:    #0F0F0F;
+      --btn-fg:    #F5F2EE;
+      --btn-radius: 0;
+      --font-display: 'Newsreader', Georgia, serif;
+      --font-body:    'Inter', system-ui, sans-serif;
+    }
+
+    /* ════════════════════════════════════════════
+       THEME 13 — FOREST CHAMBERS
+       ═════════════════════════════════════════════ */
+    .theme-13 {
+      --bg:        #1A2A22;
+      --surface:   #243530;
+      --ink:       #F0E6D2;
+      --ink-soft:  #B5AC97;
+      --ink-mute:  #6E6655;
+      --accent:    #D9A24C;
+      --rule:      #2E4036;
+      --btn-bg:    #D9A24C;
+      --btn-fg:    #1A2A22;
+      --btn-radius: 0;
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body:    'Inter', system-ui, sans-serif;
+    }
+    .theme-13 .swatch__chip { border-color: rgba(240,230,210,0.12); }
+    .theme-13 .btn:hover { background: #F0E6D2; color: #1A2A22; border-color: #F0E6D2; }
+
+    /* ════════════════════════════════════════════
+       THEME 14 — ROSE COUNSEL
+       ═════════════════════════════════════════════ */
+    .theme-14 {
+      --bg:        #F7E9E2;
+      --surface:   #FFFFFF;
+      --ink:       #2A1518;
+      --ink-soft:  #6B3D40;
+      --ink-mute:  #a18a8c;
+      --accent:    #8E2A3E;
+      --accent-2:  #C49A6C;
+      --rule:      #E5C9C0;
+      --btn-bg:    #8E2A3E;
+      --btn-fg:    #F7E9E2;
+      --btn-radius: 0;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'Inter', system-ui, sans-serif;
+    }
+    .theme-14 .theme__num { color: var(--accent); font-style: italic; }
+    .theme-14 .mock__eyebrow { color: var(--accent-2); }
+    .theme-14 .mock__eyebrow::before { background: var(--accent-2); }
+
+    /* ════════════════════════════════════════════
+       THEME 15 — INK WASH
+       ═════════════════════════════════════════════ */
+    .theme-15 {
+      --bg:        #F2EFE9;
+      --surface:   #FFFFFF;
+      --ink:       #0B0B0B;
+      --ink-soft:  #4D4D4D;
+      --ink-mute:  #9a9a96;
+      --accent:    #2E5B7A;
+      --rule:      #DAD6CC;
+      --btn-bg:    #0B0B0B;
+      --btn-fg:    #F2EFE9;
+      --btn-radius: 0;
+      --font-display: 'EB Garamond', Georgia, serif;
+      --font-body:    'Inter', system-ui, sans-serif;
+    }
+    .theme-15 .mock__headline { font-weight: 500; }
+    .theme-15 .mock__headline em { font-style: italic; color: var(--accent); }
+
+    /* ════════════════════════════════════════════
+       THEME 16 — BAUHAUS
+       ═════════════════════════════════════════════ */
+    .theme-16 {
+      --bg:        #F0EBE0;
+      --surface:   #FFFFFF;
+      --ink:       #0A0A0A;
+      --ink-soft:  #4A4A4A;
+      --ink-mute:  #8a8a8a;
+      --accent:    #E63946;
+      --accent-2:  #F5C518;
+      --accent-3:  #2860B6;
+      --rule:      #D9D0BE;
+      --btn-bg:    #0A0A0A;
+      --btn-fg:    #FFFFFF;
+      --btn-radius: 100px;
+      --font-display: 'Space Grotesk', system-ui, sans-serif;
+      --font-body:    'Inter Tight', system-ui, sans-serif;
+    }
+    .theme-16 .mock__headline { font-weight: 600; letter-spacing: -0.03em; }
+    .theme-16 .mock__headline em { font-style: normal; color: var(--accent); }
+    .theme-16 .theme__num { color: var(--accent-3); font-family: 'Space Grotesk', sans-serif; font-weight: 700; }
+    .theme-16 .theme__name em { font-style: normal; color: var(--accent); }
+    .theme-16 .mock__eyebrow { color: var(--accent-3); }
+    .theme-16 .mock__eyebrow::before { background: var(--accent-3); }
+    .theme-16 .practice-excerpt__num { color: var(--accent-2); font-style: normal; font-weight: 600; }
+    .theme-16 .btn { font-weight: 600; }
+    .theme-16 .btn:hover { background: var(--accent); border-color: var(--accent); color: #FFFFFF; }
+
+    /* ════════════════════════════════════════════
+       THEME 17 — TROPICAL EMERALD
+       ═════════════════════════════════════════════ */
+    .theme-17 {
+      --bg:        #F2EFE6;
+      --surface:   #FFFFFF;
+      --ink:       #0F2A1E;
+      --ink-soft:  #2F4E40;
+      --ink-mute:  #738377;
+      --accent:    #0E5A3E;
+      --accent-2:  #E96A4E;
+      --rule:      #D6D2C2;
+      --btn-bg:    #0E5A3E;
+      --btn-fg:    #FFFFFF;
+      --btn-radius: 0;
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body:    'DM Sans', system-ui, sans-serif;
+    }
+    .theme-17 .mock__headline em { color: var(--accent-2); }
+    .theme-17 .theme__num { color: var(--accent-2); }
+    .theme-17 .btn:hover { background: var(--accent-2); border-color: var(--accent-2); }
+
+    /* ════════════════════════════════════════════
+       THEME 18 — BONE & BORDEAUX
+       ═════════════════════════════════════════════ */
+    .theme-18 {
+      --bg:        #F0E8D8;
+      --surface:   #FFFFFF;
+      --ink:       #1F1010;
+      --ink-soft:  #594040;
+      --ink-mute:  #8a7a7a;
+      --accent:    #6B1822;
+      --accent-2:  #B89859;
+      --rule:      #D7C9AA;
+      --btn-bg:    #6B1822;
+      --btn-fg:    #F0E8D8;
+      --btn-radius: 0;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'Inter', system-ui, sans-serif;
+    }
+    .theme-18 .theme__num { font-style: italic; color: var(--accent); }
+    .theme-18 .mock__eyebrow { color: var(--accent-2); }
+    .theme-18 .mock__eyebrow::before { background: var(--accent-2); }
+
+    /* ════════════════════════════════════════════
+       THEME 19 — TWILIGHT LAVENDER
+       ═════════════════════════════════════════════ */
+    .theme-19 {
+      --bg:        #E8E0EF;
+      --surface:   #F5F0F8;
+      --ink:       #2A1A3E;
+      --ink-soft:  #5A4570;
+      --ink-mute:  #8d80a1;
+      --accent:    #4A2D6A;
+      --accent-2:  #C2A664;
+      --rule:      #C9BFD7;
+      --btn-bg:    #4A2D6A;
+      --btn-fg:    #E8E0EF;
+      --btn-radius: 0;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'Inter', system-ui, sans-serif;
+    }
+    .theme-19 .theme__num { color: var(--accent-2); font-style: italic; }
+    .theme-19 .mock__eyebrow { color: var(--accent); }
+    .theme-19 .mock__eyebrow::before { background: var(--accent); }
+    .theme-19 .btn:hover { background: var(--accent-2); border-color: var(--accent-2); color: #2A1A3E; }
+
+    /* ════════════════════════════════════════════
+       THEME 20 — LEGAL PAD
+       ═════════════════════════════════════════════ */
+    .theme-20 {
+      --bg:        #F4EBA8;
+      --surface:   #FBF6CF;
+      --ink:       #1A2438;
+      --ink-soft:  #4A5570;
+      --ink-mute:  #7a8090;
+      --accent:    #B0282A;
+      --rule:      #D9CC78;
+      --btn-bg:    #1A2438;
+      --btn-fg:    #F4EBA8;
+      --btn-radius: 0;
+      --font-display: 'Newsreader', Georgia, serif;
+      --font-body:    'Inter', system-ui, sans-serif;
+    }
+    .theme-20 .qbox { background: var(--surface); }
+    .theme-20 .theme__num { color: var(--accent); }
+    .theme-20 .btn:hover { background: var(--accent); border-color: var(--accent); color: #FFFFFF; }
+
+    /* ════════════════════════════════════════════
+       THEME 21 — VERDIGRIS
+       ═════════════════════════════════════════════ */
+    .theme-21 {
+      --bg:        #E5DCC8;
+      --surface:   #FFFFFF;
+      --ink:       #1B2A28;
+      --ink-soft:  #4A5A55;
+      --ink-mute:  #8a9590;
+      --accent:    #547967;
+      --accent-2:  #A57E48;
+      --rule:      #C9BD9D;
+      --btn-bg:    #547967;
+      --btn-fg:    #E5DCC8;
+      --btn-radius: 0;
+      --font-display: 'EB Garamond', Georgia, serif;
+      --font-body:    'Inter', system-ui, sans-serif;
+    }
+    .theme-21 .mock__headline { font-weight: 500; }
+    .theme-21 .mock__headline em { font-style: italic; color: var(--accent); }
+    .theme-21 .theme__num { color: var(--accent-2); font-style: italic; }
+    .theme-21 .btn:hover { background: var(--accent-2); border-color: var(--accent-2); }
+
+    /* ════════════════════════════════════════════
+       THEME 22 — CINEMA NOIR
+       ═════════════════════════════════════════════ */
+    .theme-22 {
+      --bg:        #050505;
+      --surface:   #121212;
+      --ink:       #F2EDE2;
+      --ink-soft:  #A8A299;
+      --ink-mute:  #5f5a52;
+      --accent:    #B0282A;
+      --accent-2:  #C9C2B5;
+      --rule:      #1F1F1F;
+      --btn-bg:    #B0282A;
+      --btn-fg:    #F2EDE2;
+      --btn-radius: 0;
+      --font-display: 'Newsreader', Georgia, serif;
+      --font-body:    'Inter', system-ui, sans-serif;
+    }
+    .theme-22 .swatch { background: #121212; }
+    .theme-22 .swatch__chip { border-color: rgba(242,237,226,0.1); }
+    .theme-22 .mock__headline { font-weight: 500; }
+    .theme-22 .btn:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+    /* ════════════════════════════════════════════
+       THEME 23 — INDIGO BLOCK
+       ═════════════════════════════════════════════ */
+    .theme-23 {
+      --bg:        #ECE6D5;
+      --surface:   #FFFFFF;
+      --ink:       #14203A;
+      --ink-soft:  #3D4C6E;
+      --ink-mute:  #7e8aa2;
+      --accent:    #1F3873;
+      --accent-2:  #D9931E;
+      --rule:      #D4C9B0;
+      --btn-bg:    #1F3873;
+      --btn-fg:    #ECE6D5;
+      --btn-radius: 0;
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body:    'DM Sans', system-ui, sans-serif;
+    }
+    .theme-23 .theme__num { color: var(--accent-2); }
+    .theme-23 .mock__eyebrow { color: var(--accent-2); }
+    .theme-23 .mock__eyebrow::before { background: var(--accent-2); }
+    .theme-23 .btn:hover { background: var(--accent-2); border-color: var(--accent-2); color: var(--ink); }
+
+    /* ════════════════════════════════════════════
+       THEME 24 — GRANITE & GOLD
+       ═════════════════════════════════════════════ */
+    .theme-24 {
+      --bg:        #DCD8D0;
+      --surface:   #F2EFEA;
+      --ink:       #1A1A1A;
+      --ink-soft:  #4F4F4F;
+      --ink-mute:  #9a9a96;
+      --accent:    #C4953E;
+      --rule:      #C7C4BE;
+      --btn-bg:    #1A1A1A;
+      --btn-fg:    #DCD8D0;
+      --btn-radius: 0;
+      --font-display: 'Newsreader', Georgia, serif;
+      --font-body:    'Inter', system-ui, sans-serif;
+    }
+
+    /* ════════════════════════════════════════════
+       THEME 25 — COFFEE HOUSE
+       ═════════════════════════════════════════════ */
+    .theme-25 {
+      --bg:        #2A1F18;
+      --surface:   #3A2A22;
+      --ink:       #F2E8D7;
+      --ink-soft:  #B5A893;
+      --ink-mute:  #7a6e5e;
+      --accent:    #C4953E;
+      --rule:      #4A3A30;
+      --btn-bg:    #C4953E;
+      --btn-fg:    #2A1F18;
+      --btn-radius: 0;
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body:    'Inter', system-ui, sans-serif;
+    }
+    .theme-25 .swatch { background: #3A2A22; }
+    .theme-25 .swatch__chip { border-color: rgba(242,232,215,0.12); }
+    .theme-25 .btn:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+    /* ─── Responsive ────────────────────────────── */
+    @media (max-width: 900px) {
+      .theme { padding: 56px 28px 72px; }
+      .mock { grid-template-columns: 1fr; gap: 40px; }
+      .theme__topline { flex-direction: column; align-items: flex-start; }
+      .theme__name-block { text-align: left; }
+      .theme__num { font-size: 3.6rem; }
+      .jumpbar { padding: 12px 18px; gap: 12px; flex-wrap: wrap; }
+      .jumpbar__hint { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="jumpbar">
+    <div class="jumpbar__title">Theme Sampler <em>— pick a number</em></div>
+    <div class="jumpbar__numbers">
+      <a href="#theme-1">01</a>
+      <a href="#theme-2">02</a>
+      <a href="#theme-3">03</a>
+      <a href="#theme-4">04</a>
+      <a href="#theme-5">05</a>
+      <a href="#theme-6">06</a>
+      <a href="#theme-7">07</a>
+      <a href="#theme-8">08</a>
+      <a href="#theme-9">09</a>
+      <a href="#theme-10">10</a>
+      <a href="#theme-11">11</a>
+      <a href="#theme-12">12</a>
+      <a href="#theme-13">13</a>
+      <a href="#theme-14">14</a>
+      <a href="#theme-15">15</a>
+      <a href="#theme-16">16</a>
+      <a href="#theme-17">17</a>
+      <a href="#theme-18">18</a>
+      <a href="#theme-19">19</a>
+      <a href="#theme-20">20</a>
+      <a href="#theme-21">21</a>
+      <a href="#theme-22">22</a>
+      <a href="#theme-23">23</a>
+      <a href="#theme-24">24</a>
+      <a href="#theme-25">25</a>
+    </div>
+  </nav>
+
+  <!-- ─── THEME TEMPLATE (re-used) ─────────────── -->
+  <!-- Each theme section duplicates the mock so palettes can be compared apples-to-apples. -->
+
+  <!-- 01 — Quiet Authority -->
+  <section class="theme theme-1" id="theme-1">
+    <div class="theme__topline">
+      <div class="theme__num">01</div>
+      <div class="theme__name-block">
+        <div class="theme__name">Quiet <em>Authority</em></div>
+        <div class="theme__mood">Senate-floor calm &middot; brass on navy</div>
+      </div>
+    </div>
+
+    <div class="palette">
+      <div class="swatch"><div class="swatch__chip" style="background:#F7F4ED"></div><div class="swatch__label">Background</div><div class="swatch__hex">#F7F4ED</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#FFFFFF"></div><div class="swatch__label">Surface</div><div class="swatch__hex">#FFFFFF</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#0E1A2B"></div><div class="swatch__label">Ink</div><div class="swatch__hex">#0E1A2B</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#46556A"></div><div class="swatch__label">Ink Soft</div><div class="swatch__hex">#46556A</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#B68C4E"></div><div class="swatch__label">Accent</div><div class="swatch__hex">#B68C4E</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#D9D2C2"></div><div class="swatch__label">Rule</div><div class="swatch__hex">#D9D2C2</div></div>
+    </div>
+
+    <div class="mock">
+      <div class="mock__hero">
+        <div class="mock__eyebrow">Advocate &middot; High Court of Kerala</div>
+        <h2 class="mock__headline">Justice works best when <em>it&rsquo;s understood.</em></h2>
+        <p class="mock__sub">If you have a legal question, or aren&rsquo;t sure if you do, feel free to ask.</p>
+
+        <form class="qbox" onsubmit="event.preventDefault()">
+          <textarea class="qbox__input" placeholder="No question is irrelevant, ask away"></textarea>
+          <div class="qbox__row">
+            <span class="qbox__hint">Private &middot; via WhatsApp</span>
+            <button class="btn" type="submit">Send to Lakshmi &rarr;</button>
+          </div>
+        </form>
+
+        <div class="cta-row">
+          <button class="btn">Primary action</button>
+          <button class="btn btn--ghost">Secondary</button>
+        </div>
+      </div>
+
+      <div class="practice-excerpt">
+        <div class="practice-excerpt__label">Practice &mdash; excerpt</div>
+        <div class="practice-excerpt__item">
+          <span class="practice-excerpt__num">i.</span>
+          <div>
+            <div class="practice-excerpt__title">Constitutional &amp; Administrative Law</div>
+            <div class="practice-excerpt__desc">Challenging government action, enforcing fundamental rights.</div>
+          </div>
+        </div>
+        <div class="practice-excerpt__item">
+          <span class="practice-excerpt__num">ii.</span>
+          <div>
+            <div class="practice-excerpt__title">Civil &amp; Criminal Litigation</div>
+            <div class="practice-excerpt__desc">Trial and appellate advocacy across all courts.</div>
+          </div>
+        </div>
+        <div class="practice-excerpt__item">
+          <span class="practice-excerpt__num">iii.</span>
+          <div>
+            <div class="practice-excerpt__title">Corporate &amp; Commercial Law</div>
+            <div class="practice-excerpt__desc">Tenders, contracts, regulatory compliance.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 — Modern Minimal -->
+  <section class="theme theme-2" id="theme-2">
+    <div class="theme__topline">
+      <div class="theme__num">02</div>
+      <div class="theme__name-block">
+        <div class="theme__name">Modern <em>Minimal</em></div>
+        <div class="theme__mood">Stripe / Linear &middot; whitespace-led</div>
+      </div>
+    </div>
+
+    <div class="palette">
+      <div class="swatch"><div class="swatch__chip" style="background:#FFFFFF;border-color:#E5E5E5"></div><div class="swatch__label">Background</div><div class="swatch__hex">#FFFFFF</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#F5F5F4"></div><div class="swatch__label">Surface</div><div class="swatch__hex">#F5F5F4</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#0A0A0A"></div><div class="swatch__label">Ink</div><div class="swatch__hex">#0A0A0A</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#525252"></div><div class="swatch__label">Ink Soft</div><div class="swatch__hex">#525252</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#2D6A4F"></div><div class="swatch__label">Accent</div><div class="swatch__hex">#2D6A4F</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#E5E5E5"></div><div class="swatch__label">Rule</div><div class="swatch__hex">#E5E5E5</div></div>
+    </div>
+
+    <div class="mock">
+      <div class="mock__hero">
+        <div class="mock__eyebrow">Lakshmi Sreedhar &middot; Advocate</div>
+        <h2 class="mock__headline">Justice works best when <em>it&rsquo;s understood.</em></h2>
+        <p class="mock__sub">If you have a legal question, or aren&rsquo;t sure if you do, feel free to ask.</p>
+
+        <form class="qbox" onsubmit="event.preventDefault()">
+          <textarea class="qbox__input" placeholder="No question is irrelevant, ask away"></textarea>
+          <div class="qbox__row">
+            <span class="qbox__hint">Private &middot; via WhatsApp</span>
+            <button class="btn" type="submit">Send &rarr;</button>
+          </div>
+        </form>
+
+        <div class="cta-row">
+          <button class="btn">Primary action</button>
+          <button class="btn btn--ghost">Secondary</button>
+        </div>
+      </div>
+
+      <div class="practice-excerpt">
+        <div class="practice-excerpt__label">Practice &mdash; excerpt</div>
+        <div class="practice-excerpt__item">
+          <span class="practice-excerpt__num">i.</span>
+          <div>
+            <div class="practice-excerpt__title">Constitutional &amp; Administrative Law</div>
+            <div class="practice-excerpt__desc">Challenging government action, enforcing fundamental rights.</div>
+          </div>
+        </div>
+        <div class="practice-excerpt__item">
+          <span class="practice-excerpt__num">ii.</span>
+          <div>
+            <div class="practice-excerpt__title">Civil &amp; Criminal Litigation</div>
+            <div class="practice-excerpt__desc">Trial and appellate advocacy across all courts.</div>
+          </div>
+        </div>
+        <div class="practice-excerpt__item">
+          <span class="practice-excerpt__num">iii.</span>
+          <div>
+            <div class="practice-excerpt__title">Corporate &amp; Commercial Law</div>
+            <div class="practice-excerpt__desc">Tenders, contracts, regulatory compliance.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 — Premium Dark -->
+  <section class="theme theme-3" id="theme-3">
+    <div class="theme__topline">
+      <div class="theme__num">03</div>
+      <div class="theme__name-block">
+        <div class="theme__name">Premium <em>Dark</em></div>
+        <div class="theme__mood">Luxe hotel &middot; charcoal &amp; amber</div>
+      </div>
+    </div>
+
+    <div class="palette">
+      <div class="swatch"><div class="swatch__chip" style="background:#141414"></div><div class="swatch__label">Background</div><div class="swatch__hex">#141414</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#1E1E1E"></div><div class="swatch__label">Surface</div><div class="swatch__hex">#1E1E1E</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#F2EDE2"></div><div class="swatch__label">Ink</div><div class="swatch__hex">#F2EDE2</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#B8B0A3"></div><div class="swatch__label">Ink Soft</div><div class="swatch__hex">#B8B0A3</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#D4A24C"></div><div class="swatch__label">Accent</div><div class="swatch__hex">#D4A24C</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#2A2A2A"></div><div class="swatch__label">Rule</div><div class="swatch__hex">#2A2A2A</div></div>
+    </div>
+
+    <div class="mock">
+      <div class="mock__hero">
+        <div class="mock__eyebrow">Advocate &middot; Kerala &middot; Supreme Court</div>
+        <h2 class="mock__headline">Justice works best when <em>it&rsquo;s understood.</em></h2>
+        <p class="mock__sub">If you have a legal question, or aren&rsquo;t sure if you do, feel free to ask.</p>
+
+        <form class="qbox" onsubmit="event.preventDefault()">
+          <textarea class="qbox__input" placeholder="No question is irrelevant, ask away"></textarea>
+          <div class="qbox__row">
+            <span class="qbox__hint">Private &middot; via WhatsApp</span>
+            <button class="btn" type="submit">Send to Lakshmi &rarr;</button>
+          </div>
+        </form>
+
+        <div class="cta-row">
+          <button class="btn">Primary action</button>
+          <button class="btn btn--ghost">Secondary</button>
+        </div>
+      </div>
+
+      <div class="practice-excerpt">
+        <div class="practice-excerpt__label">Practice &mdash; excerpt</div>
+        <div class="practice-excerpt__item">
+          <span class="practice-excerpt__num">i.</span>
+          <div>
+            <div class="practice-excerpt__title">Constitutional &amp; Administrative Law</div>
+            <div class="practice-excerpt__desc">Challenging government action, enforcing fundamental rights.</div>
+          </div>
+        </div>
+        <div class="practice-excerpt__item">
+          <span class="practice-excerpt__num">ii.</span>
+          <div>
+            <div class="practice-excerpt__title">Civil &amp; Criminal Litigation</div>
+            <div class="practice-excerpt__desc">Trial and appellate advocacy across all courts.</div>
+          </div>
+        </div>
+        <div class="practice-excerpt__item">
+          <span class="practice-excerpt__num">iii.</span>
+          <div>
+            <div class="practice-excerpt__title">Corporate &amp; Commercial Law</div>
+            <div class="practice-excerpt__desc">Tenders, contracts, regulatory compliance.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 — Coastal Kerala -->
+  <section class="theme theme-4" id="theme-4">
+    <div class="theme__topline">
+      <div class="theme__num">04</div>
+      <div class="theme__name-block">
+        <div class="theme__name">Coastal <em>Kerala</em></div>
+        <div class="theme__mood">Warm coast &middot; teal &amp; terracotta</div>
+      </div>
+    </div>
+
+    <div class="palette">
+      <div class="swatch"><div class="swatch__chip" style="background:#F4EFE3"></div><div class="swatch__label">Background</div><div class="swatch__hex">#F4EFE3</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#FFFFFF"></div><div class="swatch__label">Surface</div><div class="swatch__hex">#FFFFFF</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#1B2A2B"></div><div class="swatch__label">Ink</div><div class="swatch__hex">#1B2A2B</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#0E5C5C"></div><div class="swatch__label">Teal</div><div class="swatch__hex">#0E5C5C</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#C0613B"></div><div class="swatch__label">Terracotta</div><div class="swatch__hex">#C0613B</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#D9D0BD"></div><div class="swatch__label">Rule</div><div class="swatch__hex">#D9D0BD</div></div>
+    </div>
+
+    <div class="mock">
+      <div class="mock__hero">
+        <div class="mock__eyebrow">L.S. &middot; Advocate &middot; Kerala</div>
+        <h2 class="mock__headline">Justice works best, when <em>it&rsquo;s understood.</em></h2>
+        <p class="mock__sub">If you have a legal question, or aren&rsquo;t sure if you do, feel free to ask.</p>
+
+        <form class="qbox" onsubmit="event.preventDefault()">
+          <textarea class="qbox__input" placeholder="No question is irrelevant, ask away"></textarea>
+          <div class="qbox__row">
+            <span class="qbox__hint">Private &middot; via WhatsApp</span>
+            <button class="btn" type="submit">Send to Lakshmi &rarr;</button>
+          </div>
+        </form>
+
+        <div class="cta-row">
+          <button class="btn">Primary action</button>
+          <button class="btn btn--ghost">Secondary</button>
+        </div>
+      </div>
+
+      <div class="practice-excerpt">
+        <div class="practice-excerpt__label">Practice &mdash; excerpt</div>
+        <div class="practice-excerpt__item">
+          <span class="practice-excerpt__num">i.</span>
+          <div>
+            <div class="practice-excerpt__title">Constitutional &amp; Administrative Law</div>
+            <div class="practice-excerpt__desc">Challenging government action, enforcing fundamental rights.</div>
+          </div>
+        </div>
+        <div class="practice-excerpt__item">
+          <span class="practice-excerpt__num">ii.</span>
+          <div>
+            <div class="practice-excerpt__title">Civil &amp; Criminal Litigation</div>
+            <div class="practice-excerpt__desc">Trial and appellate advocacy across all courts.</div>
+          </div>
+        </div>
+        <div class="practice-excerpt__item">
+          <span class="practice-excerpt__num">iii.</span>
+          <div>
+            <div class="practice-excerpt__title">Corporate &amp; Commercial Law</div>
+            <div class="practice-excerpt__desc">Tenders, contracts, regulatory compliance.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 — Editorial Crimson -->
+  <section class="theme theme-5" id="theme-5">
+    <div class="theme__topline">
+      <div class="theme__num">05</div>
+      <div class="theme__name-block">
+        <div class="theme__name">Editorial <em>Crimson</em></div>
+        <div class="theme__mood">NYT op-ed &middot; white, ink, ribbon red</div>
+      </div>
+    </div>
+
+    <div class="palette">
+      <div class="swatch"><div class="swatch__chip" style="background:#FFFFFF;border-color:#E2E2DC"></div><div class="swatch__label">Background</div><div class="swatch__hex">#FFFFFF</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#FAFAF7"></div><div class="swatch__label">Surface</div><div class="swatch__hex">#FAFAF7</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#111111"></div><div class="swatch__label">Ink</div><div class="swatch__hex">#111111</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#4A4A4A"></div><div class="swatch__label">Ink Soft</div><div class="swatch__hex">#4A4A4A</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#B0282A"></div><div class="swatch__label">Accent</div><div class="swatch__hex">#B0282A</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#E2E2DC"></div><div class="swatch__label">Rule</div><div class="swatch__hex">#E2E2DC</div></div>
+    </div>
+
+    <div class="mock">
+      <div class="mock__hero">
+        <div class="mock__eyebrow">Advocate &middot; High Court of Kerala</div>
+        <h2 class="mock__headline">Justice works best when <em>it&rsquo;s understood.</em></h2>
+        <p class="mock__sub">If you have a legal question, or aren&rsquo;t sure if you do, feel free to ask.</p>
+        <form class="qbox" onsubmit="event.preventDefault()">
+          <textarea class="qbox__input" placeholder="No question is irrelevant, ask away"></textarea>
+          <div class="qbox__row">
+            <span class="qbox__hint">Private &middot; via WhatsApp</span>
+            <button class="btn" type="submit">Send to Lakshmi &rarr;</button>
+          </div>
+        </form>
+        <div class="cta-row">
+          <button class="btn">Primary action</button>
+          <button class="btn btn--ghost">Secondary</button>
+        </div>
+      </div>
+
+      <div class="practice-excerpt">
+        <div class="practice-excerpt__label">Practice &mdash; excerpt</div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">i.</span><div><div class="practice-excerpt__title">Constitutional &amp; Administrative Law</div><div class="practice-excerpt__desc">Challenging government action, enforcing fundamental rights.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">ii.</span><div><div class="practice-excerpt__title">Civil &amp; Criminal Litigation</div><div class="practice-excerpt__desc">Trial and appellate advocacy across all courts.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">iii.</span><div><div class="practice-excerpt__title">Corporate &amp; Commercial Law</div><div class="practice-excerpt__desc">Tenders, contracts, regulatory compliance.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 — Sepia Archive -->
+  <section class="theme theme-6" id="theme-6">
+    <div class="theme__topline">
+      <div class="theme__num">06</div>
+      <div class="theme__name-block">
+        <div class="theme__name">Sepia <em>Archive</em></div>
+        <div class="theme__mood">Old bookshelf &middot; parchment &amp; tobacco</div>
+      </div>
+    </div>
+
+    <div class="palette">
+      <div class="swatch"><div class="swatch__chip" style="background:#EDE3CC"></div><div class="swatch__label">Background</div><div class="swatch__hex">#EDE3CC</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#F6EFDC"></div><div class="swatch__label">Surface</div><div class="swatch__hex">#F6EFDC</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#2A1E10"></div><div class="swatch__label">Ink</div><div class="swatch__hex">#2A1E10</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#5A4630"></div><div class="swatch__label">Ink Soft</div><div class="swatch__hex">#5A4630</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#7A3B1A"></div><div class="swatch__label">Accent</div><div class="swatch__hex">#7A3B1A</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#C9B98E"></div><div class="swatch__label">Rule</div><div class="swatch__hex">#C9B98E</div></div>
+    </div>
+
+    <div class="mock">
+      <div class="mock__hero">
+        <div class="mock__eyebrow">Advocate &middot; est. 2016</div>
+        <h2 class="mock__headline">Justice works best when <em>it&rsquo;s understood.</em></h2>
+        <p class="mock__sub">If you have a legal question, or aren&rsquo;t sure if you do, feel free to ask.</p>
+        <form class="qbox" onsubmit="event.preventDefault()">
+          <textarea class="qbox__input" placeholder="No question is irrelevant, ask away"></textarea>
+          <div class="qbox__row">
+            <span class="qbox__hint">Private &middot; via WhatsApp</span>
+            <button class="btn" type="submit">Send to Lakshmi &rarr;</button>
+          </div>
+        </form>
+        <div class="cta-row">
+          <button class="btn">Primary action</button>
+          <button class="btn btn--ghost">Secondary</button>
+        </div>
+      </div>
+
+      <div class="practice-excerpt">
+        <div class="practice-excerpt__label">Practice &mdash; excerpt</div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">i.</span><div><div class="practice-excerpt__title">Constitutional &amp; Administrative Law</div><div class="practice-excerpt__desc">Challenging government action, enforcing fundamental rights.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">ii.</span><div><div class="practice-excerpt__title">Civil &amp; Criminal Litigation</div><div class="practice-excerpt__desc">Trial and appellate advocacy across all courts.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">iii.</span><div><div class="practice-excerpt__title">Corporate &amp; Commercial Law</div><div class="practice-excerpt__desc">Tenders, contracts, regulatory compliance.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 — Architect's Mark -->
+  <section class="theme theme-7" id="theme-7">
+    <div class="theme__topline">
+      <div class="theme__num">07</div>
+      <div class="theme__name-block">
+        <div class="theme__name">Architect&rsquo;s <em>Mark</em></div>
+        <div class="theme__mood">Concrete grey &middot; cobalt blue &middot; structural</div>
+      </div>
+    </div>
+
+    <div class="palette">
+      <div class="swatch"><div class="swatch__chip" style="background:#ECEDEE"></div><div class="swatch__label">Background</div><div class="swatch__hex">#ECEDEE</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#FFFFFF"></div><div class="swatch__label">Surface</div><div class="swatch__hex">#FFFFFF</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#14181B"></div><div class="swatch__label">Ink</div><div class="swatch__hex">#14181B</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#4D5358"></div><div class="swatch__label">Ink Soft</div><div class="swatch__hex">#4D5358</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#1E50FF"></div><div class="swatch__label">Accent</div><div class="swatch__hex">#1E50FF</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#CFD3D7"></div><div class="swatch__label">Rule</div><div class="swatch__hex">#CFD3D7</div></div>
+    </div>
+
+    <div class="mock">
+      <div class="mock__hero">
+        <div class="mock__eyebrow">LS &middot; ADVOCATE &middot; KER</div>
+        <h2 class="mock__headline">Justice works best when <em>it&rsquo;s understood.</em></h2>
+        <p class="mock__sub">If you have a legal question, or aren&rsquo;t sure if you do, feel free to ask.</p>
+        <form class="qbox" onsubmit="event.preventDefault()">
+          <textarea class="qbox__input" placeholder="No question is irrelevant, ask away"></textarea>
+          <div class="qbox__row">
+            <span class="qbox__hint">Private &middot; via WhatsApp</span>
+            <button class="btn" type="submit">Send to Lakshmi &rarr;</button>
+          </div>
+        </form>
+        <div class="cta-row">
+          <button class="btn">Primary action</button>
+          <button class="btn btn--ghost">Secondary</button>
+        </div>
+      </div>
+
+      <div class="practice-excerpt">
+        <div class="practice-excerpt__label">Practice &mdash; excerpt</div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">01</span><div><div class="practice-excerpt__title">Constitutional &amp; Administrative Law</div><div class="practice-excerpt__desc">Challenging government action, enforcing fundamental rights.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">02</span><div><div class="practice-excerpt__title">Civil &amp; Criminal Litigation</div><div class="practice-excerpt__desc">Trial and appellate advocacy across all courts.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">03</span><div><div class="practice-excerpt__title">Corporate &amp; Commercial Law</div><div class="practice-excerpt__desc">Tenders, contracts, regulatory compliance.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 — Royal Aubergine -->
+  <section class="theme theme-8" id="theme-8">
+    <div class="theme__topline">
+      <div class="theme__num">08</div>
+      <div class="theme__name-block">
+        <div class="theme__name">Royal <em>Aubergine</em></div>
+        <div class="theme__mood">Plum &amp; champagne &middot; regal warmth</div>
+      </div>
+    </div>
+
+    <div class="palette">
+      <div class="swatch"><div class="swatch__chip" style="background:#FBF6EF"></div><div class="swatch__label">Background</div><div class="swatch__hex">#FBF6EF</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#FFFFFF"></div><div class="swatch__label">Surface</div><div class="swatch__hex">#FFFFFF</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#2E1F35"></div><div class="swatch__label">Ink</div><div class="swatch__hex">#2E1F35</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#5C2A4F"></div><div class="swatch__label">Aubergine</div><div class="swatch__hex">#5C2A4F</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#B89968"></div><div class="swatch__label">Champagne</div><div class="swatch__hex">#B89968</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#E2D7C3"></div><div class="swatch__label">Rule</div><div class="swatch__hex">#E2D7C3</div></div>
+    </div>
+
+    <div class="mock">
+      <div class="mock__hero">
+        <div class="mock__eyebrow">Advocate &middot; Kerala &middot; Supreme Court</div>
+        <h2 class="mock__headline">Justice works best when <em>it&rsquo;s understood.</em></h2>
+        <p class="mock__sub">If you have a legal question, or aren&rsquo;t sure if you do, feel free to ask.</p>
+        <form class="qbox" onsubmit="event.preventDefault()">
+          <textarea class="qbox__input" placeholder="No question is irrelevant, ask away"></textarea>
+          <div class="qbox__row">
+            <span class="qbox__hint">Private &middot; via WhatsApp</span>
+            <button class="btn" type="submit">Send to Lakshmi &rarr;</button>
+          </div>
+        </form>
+        <div class="cta-row">
+          <button class="btn">Primary action</button>
+          <button class="btn btn--ghost">Secondary</button>
+        </div>
+      </div>
+
+      <div class="practice-excerpt">
+        <div class="practice-excerpt__label">Practice &mdash; excerpt</div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">i.</span><div><div class="practice-excerpt__title">Constitutional &amp; Administrative Law</div><div class="practice-excerpt__desc">Challenging government action, enforcing fundamental rights.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">ii.</span><div><div class="practice-excerpt__title">Civil &amp; Criminal Litigation</div><div class="practice-excerpt__desc">Trial and appellate advocacy across all courts.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">iii.</span><div><div class="practice-excerpt__title">Corporate &amp; Commercial Law</div><div class="practice-excerpt__desc">Tenders, contracts, regulatory compliance.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 — Sand & Olive -->
+  <section class="theme theme-9" id="theme-9">
+    <div class="theme__topline">
+      <div class="theme__num">09</div>
+      <div class="theme__name-block">
+        <div class="theme__name">Sand &amp; <em>Olive</em></div>
+        <div class="theme__mood">Earthy &middot; warm sand, olive, rust</div>
+      </div>
+    </div>
+
+    <div class="palette">
+      <div class="swatch"><div class="swatch__chip" style="background:#E8DEC5"></div><div class="swatch__label">Background</div><div class="swatch__hex">#E8DEC5</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#F2EAD4"></div><div class="swatch__label">Surface</div><div class="swatch__hex">#F2EAD4</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#2B2A1C"></div><div class="swatch__label">Ink</div><div class="swatch__hex">#2B2A1C</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#4C5A2C"></div><div class="swatch__label">Olive</div><div class="swatch__hex">#4C5A2C</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#B85A1E"></div><div class="swatch__label">Rust</div><div class="swatch__hex">#B85A1E</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#C9BD93"></div><div class="swatch__label">Rule</div><div class="swatch__hex">#C9BD93</div></div>
+    </div>
+
+    <div class="mock">
+      <div class="mock__hero">
+        <div class="mock__eyebrow">Advocate &middot; High Court of Kerala</div>
+        <h2 class="mock__headline">Justice works best when <em>it&rsquo;s understood.</em></h2>
+        <p class="mock__sub">If you have a legal question, or aren&rsquo;t sure if you do, feel free to ask.</p>
+        <form class="qbox" onsubmit="event.preventDefault()">
+          <textarea class="qbox__input" placeholder="No question is irrelevant, ask away"></textarea>
+          <div class="qbox__row">
+            <span class="qbox__hint">Private &middot; via WhatsApp</span>
+            <button class="btn" type="submit">Send to Lakshmi &rarr;</button>
+          </div>
+        </form>
+        <div class="cta-row">
+          <button class="btn">Primary action</button>
+          <button class="btn btn--ghost">Secondary</button>
+        </div>
+      </div>
+
+      <div class="practice-excerpt">
+        <div class="practice-excerpt__label">Practice &mdash; excerpt</div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">i.</span><div><div class="practice-excerpt__title">Constitutional &amp; Administrative Law</div><div class="practice-excerpt__desc">Challenging government action, enforcing fundamental rights.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">ii.</span><div><div class="practice-excerpt__title">Civil &amp; Criminal Litigation</div><div class="practice-excerpt__desc">Trial and appellate advocacy across all courts.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">iii.</span><div><div class="practice-excerpt__title">Corporate &amp; Commercial Law</div><div class="practice-excerpt__desc">Tenders, contracts, regulatory compliance.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HTML template (re-used) — same .mock block in each new section
+       so palette/typography differences read cleanly across themes. -->
+
+  <!-- 10 — Brutalist Mono -->
+  <section class="theme theme-10" id="theme-10">
+    <div class="theme__topline">
+      <div class="theme__num">10</div>
+      <div class="theme__name-block">
+        <div class="theme__name">Brutalist <em>Mono</em></div>
+        <div class="theme__mood">Black, white, electric lime &middot; loud</div>
+      </div>
+    </div>
+
+    <div class="palette">
+      <div class="swatch"><div class="swatch__chip" style="background:#0A0A0A"></div><div class="swatch__label">Background</div><div class="swatch__hex">#0A0A0A</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#161616"></div><div class="swatch__label">Surface</div><div class="swatch__hex">#161616</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#FFFFFF"></div><div class="swatch__label">Ink</div><div class="swatch__hex">#FFFFFF</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#B5B5B5"></div><div class="swatch__label">Ink Soft</div><div class="swatch__hex">#B5B5B5</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#D0FF3E"></div><div class="swatch__label">Accent</div><div class="swatch__hex">#D0FF3E</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#262626"></div><div class="swatch__label">Rule</div><div class="swatch__hex">#262626</div></div>
+    </div>
+
+    <div class="mock">
+      <div class="mock__hero">
+        <div class="mock__eyebrow">LAKSHMI SREEDHAR &middot; ADVOCATE</div>
+        <h2 class="mock__headline">Justice works best when <em>it&rsquo;s understood.</em></h2>
+        <p class="mock__sub">If you have a legal question, or aren&rsquo;t sure if you do, feel free to ask.</p>
+        <form class="qbox" onsubmit="event.preventDefault()">
+          <textarea class="qbox__input" placeholder="No question is irrelevant, ask away"></textarea>
+          <div class="qbox__row">
+            <span class="qbox__hint">Private &middot; via WhatsApp</span>
+            <button class="btn" type="submit">Send &rarr;</button>
+          </div>
+        </form>
+        <div class="cta-row">
+          <button class="btn">Primary action</button>
+          <button class="btn btn--ghost">Secondary</button>
+        </div>
+      </div>
+
+      <div class="practice-excerpt">
+        <div class="practice-excerpt__label">Practice &mdash; excerpt</div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">01</span><div><div class="practice-excerpt__title">Constitutional &amp; Administrative Law</div><div class="practice-excerpt__desc">Challenging government action, enforcing fundamental rights.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">02</span><div><div class="practice-excerpt__title">Civil &amp; Criminal Litigation</div><div class="practice-excerpt__desc">Trial and appellate advocacy across all courts.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">03</span><div><div class="practice-excerpt__title">Corporate &amp; Commercial Law</div><div class="practice-excerpt__desc">Tenders, contracts, regulatory compliance.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 — Mughal Manuscript -->
+  <section class="theme theme-11" id="theme-11">
+    <div class="theme__topline">
+      <div class="theme__num">11</div>
+      <div class="theme__name-block">
+        <div class="theme__name">Mughal <em>Manuscript</em></div>
+        <div class="theme__mood">Indigo &amp; saffron &middot; regional ink</div>
+      </div>
+    </div>
+    <div class="palette">
+      <div class="swatch"><div class="swatch__chip" style="background:#FBF1E0"></div><div class="swatch__label">Background</div><div class="swatch__hex">#FBF1E0</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#FFFFFF"></div><div class="swatch__label">Surface</div><div class="swatch__hex">#FFFFFF</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#1F1736"></div><div class="swatch__label">Indigo Ink</div><div class="swatch__hex">#1F1736</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#C45A2C"></div><div class="swatch__label">Saffron</div><div class="swatch__hex">#C45A2C</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#8C1E2E"></div><div class="swatch__label">Maroon</div><div class="swatch__hex">#8C1E2E</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#E5D6B6"></div><div class="swatch__label">Rule</div><div class="swatch__hex">#E5D6B6</div></div>
+    </div>
+    <div class="mock">
+      <div class="mock__hero">
+        <div class="mock__eyebrow">Advocate &middot; Kerala &middot; Pan-India</div>
+        <h2 class="mock__headline">Justice works best when <em>it&rsquo;s understood.</em></h2>
+        <p class="mock__sub">If you have a legal question, or aren&rsquo;t sure if you do, feel free to ask.</p>
+        <form class="qbox" onsubmit="event.preventDefault()">
+          <textarea class="qbox__input" placeholder="No question is irrelevant, ask away"></textarea>
+          <div class="qbox__row"><span class="qbox__hint">Private &middot; via WhatsApp</span><button class="btn" type="submit">Send to Lakshmi &rarr;</button></div>
+        </form>
+        <div class="cta-row"><button class="btn">Primary action</button><button class="btn btn--ghost">Secondary</button></div>
+      </div>
+      <div class="practice-excerpt">
+        <div class="practice-excerpt__label">Practice &mdash; excerpt</div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">i.</span><div><div class="practice-excerpt__title">Constitutional &amp; Administrative Law</div><div class="practice-excerpt__desc">Challenging government action, enforcing fundamental rights.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">ii.</span><div><div class="practice-excerpt__title">Civil &amp; Criminal Litigation</div><div class="practice-excerpt__desc">Trial and appellate advocacy across all courts.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">iii.</span><div><div class="practice-excerpt__title">Corporate &amp; Commercial Law</div><div class="practice-excerpt__desc">Tenders, contracts, regulatory compliance.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 — Marble & Black -->
+  <section class="theme theme-12" id="theme-12">
+    <div class="theme__topline">
+      <div class="theme__num">12</div>
+      <div class="theme__name-block">
+        <div class="theme__name">Marble &amp; <em>Black</em></div>
+        <div class="theme__mood">Courthouse marble &middot; soft brass</div>
+      </div>
+    </div>
+    <div class="palette">
+      <div class="swatch"><div class="swatch__chip" style="background:#F5F2EE"></div><div class="swatch__label">Background</div><div class="swatch__hex">#F5F2EE</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#FFFFFF"></div><div class="swatch__label">Surface</div><div class="swatch__hex">#FFFFFF</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#0F0F0F"></div><div class="swatch__label">Ink</div><div class="swatch__hex">#0F0F0F</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#4A4A4A"></div><div class="swatch__label">Ink Soft</div><div class="swatch__hex">#4A4A4A</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#8C7A52"></div><div class="swatch__label">Soft Brass</div><div class="swatch__hex">#8C7A52</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#D7D2CB"></div><div class="swatch__label">Rule</div><div class="swatch__hex">#D7D2CB</div></div>
+    </div>
+    <div class="mock">
+      <div class="mock__hero">
+        <div class="mock__eyebrow">Advocate &middot; High Court of Kerala</div>
+        <h2 class="mock__headline">Justice works best when <em>it&rsquo;s understood.</em></h2>
+        <p class="mock__sub">If you have a legal question, or aren&rsquo;t sure if you do, feel free to ask.</p>
+        <form class="qbox" onsubmit="event.preventDefault()">
+          <textarea class="qbox__input" placeholder="No question is irrelevant, ask away"></textarea>
+          <div class="qbox__row"><span class="qbox__hint">Private &middot; via WhatsApp</span><button class="btn" type="submit">Send to Lakshmi &rarr;</button></div>
+        </form>
+        <div class="cta-row"><button class="btn">Primary action</button><button class="btn btn--ghost">Secondary</button></div>
+      </div>
+      <div class="practice-excerpt">
+        <div class="practice-excerpt__label">Practice &mdash; excerpt</div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">i.</span><div><div class="practice-excerpt__title">Constitutional &amp; Administrative Law</div><div class="practice-excerpt__desc">Challenging government action, enforcing fundamental rights.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">ii.</span><div><div class="practice-excerpt__title">Civil &amp; Criminal Litigation</div><div class="practice-excerpt__desc">Trial and appellate advocacy across all courts.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">iii.</span><div><div class="practice-excerpt__title">Corporate &amp; Commercial Law</div><div class="practice-excerpt__desc">Tenders, contracts, regulatory compliance.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 — Forest Chambers -->
+  <section class="theme theme-13" id="theme-13">
+    <div class="theme__topline">
+      <div class="theme__num">13</div>
+      <div class="theme__name-block">
+        <div class="theme__name">Forest <em>Chambers</em></div>
+        <div class="theme__mood">Deep forest &amp; cream &middot; library quiet</div>
+      </div>
+    </div>
+    <div class="palette">
+      <div class="swatch"><div class="swatch__chip" style="background:#1A2A22"></div><div class="swatch__label">Background</div><div class="swatch__hex">#1A2A22</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#243530"></div><div class="swatch__label">Surface</div><div class="swatch__hex">#243530</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#F0E6D2"></div><div class="swatch__label">Cream</div><div class="swatch__hex">#F0E6D2</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#B5AC97"></div><div class="swatch__label">Ink Soft</div><div class="swatch__hex">#B5AC97</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#D9A24C"></div><div class="swatch__label">Amber</div><div class="swatch__hex">#D9A24C</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#2E4036"></div><div class="swatch__label">Rule</div><div class="swatch__hex">#2E4036</div></div>
+    </div>
+    <div class="mock">
+      <div class="mock__hero">
+        <div class="mock__eyebrow">Advocate &middot; Kerala</div>
+        <h2 class="mock__headline">Justice works best when <em>it&rsquo;s understood.</em></h2>
+        <p class="mock__sub">If you have a legal question, or aren&rsquo;t sure if you do, feel free to ask.</p>
+        <form class="qbox" onsubmit="event.preventDefault()">
+          <textarea class="qbox__input" placeholder="No question is irrelevant, ask away"></textarea>
+          <div class="qbox__row"><span class="qbox__hint">Private &middot; via WhatsApp</span><button class="btn" type="submit">Send to Lakshmi &rarr;</button></div>
+        </form>
+        <div class="cta-row"><button class="btn">Primary action</button><button class="btn btn--ghost">Secondary</button></div>
+      </div>
+      <div class="practice-excerpt">
+        <div class="practice-excerpt__label">Practice &mdash; excerpt</div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">i.</span><div><div class="practice-excerpt__title">Constitutional &amp; Administrative Law</div><div class="practice-excerpt__desc">Challenging government action, enforcing fundamental rights.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">ii.</span><div><div class="practice-excerpt__title">Civil &amp; Criminal Litigation</div><div class="practice-excerpt__desc">Trial and appellate advocacy across all courts.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">iii.</span><div><div class="practice-excerpt__title">Corporate &amp; Commercial Law</div><div class="practice-excerpt__desc">Tenders, contracts, regulatory compliance.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14 — Rose Counsel -->
+  <section class="theme theme-14" id="theme-14">
+    <div class="theme__topline">
+      <div class="theme__num">14</div>
+      <div class="theme__name-block">
+        <div class="theme__name">Rose <em>Counsel</em></div>
+        <div class="theme__mood">Dusty rose &middot; bordeaux &amp; warm gold</div>
+      </div>
+    </div>
+    <div class="palette">
+      <div class="swatch"><div class="swatch__chip" style="background:#F7E9E2"></div><div class="swatch__label">Background</div><div class="swatch__hex">#F7E9E2</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#FFFFFF"></div><div class="swatch__label">Surface</div><div class="swatch__hex">#FFFFFF</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#2A1518"></div><div class="swatch__label">Ink</div><div class="swatch__hex">#2A1518</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#8E2A3E"></div><div class="swatch__label">Bordeaux</div><div class="swatch__hex">#8E2A3E</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#C49A6C"></div><div class="swatch__label">Warm Gold</div><div class="swatch__hex">#C49A6C</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#E5C9C0"></div><div class="swatch__label">Rule</div><div class="swatch__hex">#E5C9C0</div></div>
+    </div>
+    <div class="mock">
+      <div class="mock__hero">
+        <div class="mock__eyebrow">Advocate &middot; High Court of Kerala</div>
+        <h2 class="mock__headline">Justice works best when <em>it&rsquo;s understood.</em></h2>
+        <p class="mock__sub">If you have a legal question, or aren&rsquo;t sure if you do, feel free to ask.</p>
+        <form class="qbox" onsubmit="event.preventDefault()">
+          <textarea class="qbox__input" placeholder="No question is irrelevant, ask away"></textarea>
+          <div class="qbox__row"><span class="qbox__hint">Private &middot; via WhatsApp</span><button class="btn" type="submit">Send to Lakshmi &rarr;</button></div>
+        </form>
+        <div class="cta-row"><button class="btn">Primary action</button><button class="btn btn--ghost">Secondary</button></div>
+      </div>
+      <div class="practice-excerpt">
+        <div class="practice-excerpt__label">Practice &mdash; excerpt</div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">i.</span><div><div class="practice-excerpt__title">Constitutional &amp; Administrative Law</div><div class="practice-excerpt__desc">Challenging government action, enforcing fundamental rights.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">ii.</span><div><div class="practice-excerpt__title">Civil &amp; Criminal Litigation</div><div class="practice-excerpt__desc">Trial and appellate advocacy across all courts.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">iii.</span><div><div class="practice-excerpt__title">Corporate &amp; Commercial Law</div><div class="practice-excerpt__desc">Tenders, contracts, regulatory compliance.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 15 — Ink Wash -->
+  <section class="theme theme-15" id="theme-15">
+    <div class="theme__topline">
+      <div class="theme__num">15</div>
+      <div class="theme__name-block">
+        <div class="theme__name">Ink <em>Wash</em></div>
+        <div class="theme__mood">Sumi black &middot; watery indigo</div>
+      </div>
+    </div>
+    <div class="palette">
+      <div class="swatch"><div class="swatch__chip" style="background:#F2EFE9"></div><div class="swatch__label">Background</div><div class="swatch__hex">#F2EFE9</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#FFFFFF"></div><div class="swatch__label">Surface</div><div class="swatch__hex">#FFFFFF</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#0B0B0B"></div><div class="swatch__label">Sumi</div><div class="swatch__hex">#0B0B0B</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#4D4D4D"></div><div class="swatch__label">Ink Soft</div><div class="swatch__hex">#4D4D4D</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#2E5B7A"></div><div class="swatch__label">Indigo Wash</div><div class="swatch__hex">#2E5B7A</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#DAD6CC"></div><div class="swatch__label">Rule</div><div class="swatch__hex">#DAD6CC</div></div>
+    </div>
+    <div class="mock">
+      <div class="mock__hero">
+        <div class="mock__eyebrow">Advocate &middot; Kerala</div>
+        <h2 class="mock__headline">Justice works best when <em>it&rsquo;s understood.</em></h2>
+        <p class="mock__sub">If you have a legal question, or aren&rsquo;t sure if you do, feel free to ask.</p>
+        <form class="qbox" onsubmit="event.preventDefault()">
+          <textarea class="qbox__input" placeholder="No question is irrelevant, ask away"></textarea>
+          <div class="qbox__row"><span class="qbox__hint">Private &middot; via WhatsApp</span><button class="btn" type="submit">Send to Lakshmi &rarr;</button></div>
+        </form>
+        <div class="cta-row"><button class="btn">Primary action</button><button class="btn btn--ghost">Secondary</button></div>
+      </div>
+      <div class="practice-excerpt">
+        <div class="practice-excerpt__label">Practice &mdash; excerpt</div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">i.</span><div><div class="practice-excerpt__title">Constitutional &amp; Administrative Law</div><div class="practice-excerpt__desc">Challenging government action, enforcing fundamental rights.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">ii.</span><div><div class="practice-excerpt__title">Civil &amp; Criminal Litigation</div><div class="practice-excerpt__desc">Trial and appellate advocacy across all courts.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">iii.</span><div><div class="practice-excerpt__title">Corporate &amp; Commercial Law</div><div class="practice-excerpt__desc">Tenders, contracts, regulatory compliance.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 16 — Bauhaus -->
+  <section class="theme theme-16" id="theme-16">
+    <div class="theme__topline">
+      <div class="theme__num">16</div>
+      <div class="theme__name-block">
+        <div class="theme__name">Bauhaus <em>Counsel</em></div>
+        <div class="theme__mood">Primary palette &middot; geometric, bold</div>
+      </div>
+    </div>
+    <div class="palette">
+      <div class="swatch"><div class="swatch__chip" style="background:#F0EBE0"></div><div class="swatch__label">Background</div><div class="swatch__hex">#F0EBE0</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#0A0A0A"></div><div class="swatch__label">Ink</div><div class="swatch__hex">#0A0A0A</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#E63946"></div><div class="swatch__label">Red</div><div class="swatch__hex">#E63946</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#F5C518"></div><div class="swatch__label">Yellow</div><div class="swatch__hex">#F5C518</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#2860B6"></div><div class="swatch__label">Blue</div><div class="swatch__hex">#2860B6</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#D9D0BE"></div><div class="swatch__label">Rule</div><div class="swatch__hex">#D9D0BE</div></div>
+    </div>
+    <div class="mock">
+      <div class="mock__hero">
+        <div class="mock__eyebrow">Advocate &middot; High Court of Kerala</div>
+        <h2 class="mock__headline">Justice works best when <em>it&rsquo;s understood.</em></h2>
+        <p class="mock__sub">If you have a legal question, or aren&rsquo;t sure if you do, feel free to ask.</p>
+        <form class="qbox" onsubmit="event.preventDefault()">
+          <textarea class="qbox__input" placeholder="No question is irrelevant, ask away"></textarea>
+          <div class="qbox__row"><span class="qbox__hint">Private &middot; via WhatsApp</span><button class="btn" type="submit">Send &rarr;</button></div>
+        </form>
+        <div class="cta-row"><button class="btn">Primary action</button><button class="btn btn--ghost">Secondary</button></div>
+      </div>
+      <div class="practice-excerpt">
+        <div class="practice-excerpt__label">Practice &mdash; excerpt</div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">01</span><div><div class="practice-excerpt__title">Constitutional &amp; Administrative Law</div><div class="practice-excerpt__desc">Challenging government action, enforcing fundamental rights.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">02</span><div><div class="practice-excerpt__title">Civil &amp; Criminal Litigation</div><div class="practice-excerpt__desc">Trial and appellate advocacy across all courts.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">03</span><div><div class="practice-excerpt__title">Corporate &amp; Commercial Law</div><div class="practice-excerpt__desc">Tenders, contracts, regulatory compliance.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 17 — Tropical Emerald -->
+  <section class="theme theme-17" id="theme-17">
+    <div class="theme__topline">
+      <div class="theme__num">17</div>
+      <div class="theme__name-block">
+        <div class="theme__name">Tropical <em>Emerald</em></div>
+        <div class="theme__mood">Deep emerald &middot; coral pop</div>
+      </div>
+    </div>
+    <div class="palette">
+      <div class="swatch"><div class="swatch__chip" style="background:#F2EFE6"></div><div class="swatch__label">Background</div><div class="swatch__hex">#F2EFE6</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#FFFFFF"></div><div class="swatch__label">Surface</div><div class="swatch__hex">#FFFFFF</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#0F2A1E"></div><div class="swatch__label">Ink</div><div class="swatch__hex">#0F2A1E</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#0E5A3E"></div><div class="swatch__label">Emerald</div><div class="swatch__hex">#0E5A3E</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#E96A4E"></div><div class="swatch__label">Coral</div><div class="swatch__hex">#E96A4E</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#D6D2C2"></div><div class="swatch__label">Rule</div><div class="swatch__hex">#D6D2C2</div></div>
+    </div>
+    <div class="mock">
+      <div class="mock__hero">
+        <div class="mock__eyebrow">Advocate &middot; Kerala &middot; Supreme Court</div>
+        <h2 class="mock__headline">Justice works best when <em>it&rsquo;s understood.</em></h2>
+        <p class="mock__sub">If you have a legal question, or aren&rsquo;t sure if you do, feel free to ask.</p>
+        <form class="qbox" onsubmit="event.preventDefault()">
+          <textarea class="qbox__input" placeholder="No question is irrelevant, ask away"></textarea>
+          <div class="qbox__row"><span class="qbox__hint">Private &middot; via WhatsApp</span><button class="btn" type="submit">Send to Lakshmi &rarr;</button></div>
+        </form>
+        <div class="cta-row"><button class="btn">Primary action</button><button class="btn btn--ghost">Secondary</button></div>
+      </div>
+      <div class="practice-excerpt">
+        <div class="practice-excerpt__label">Practice &mdash; excerpt</div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">i.</span><div><div class="practice-excerpt__title">Constitutional &amp; Administrative Law</div><div class="practice-excerpt__desc">Challenging government action, enforcing fundamental rights.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">ii.</span><div><div class="practice-excerpt__title">Civil &amp; Criminal Litigation</div><div class="practice-excerpt__desc">Trial and appellate advocacy across all courts.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">iii.</span><div><div class="practice-excerpt__title">Corporate &amp; Commercial Law</div><div class="practice-excerpt__desc">Tenders, contracts, regulatory compliance.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 18 — Bone & Bordeaux -->
+  <section class="theme theme-18" id="theme-18">
+    <div class="theme__topline">
+      <div class="theme__num">18</div>
+      <div class="theme__name-block">
+        <div class="theme__name">Bone &amp; <em>Bordeaux</em></div>
+        <div class="theme__mood">French classical &middot; gold edge</div>
+      </div>
+    </div>
+    <div class="palette">
+      <div class="swatch"><div class="swatch__chip" style="background:#F0E8D8"></div><div class="swatch__label">Background</div><div class="swatch__hex">#F0E8D8</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#FFFFFF"></div><div class="swatch__label">Surface</div><div class="swatch__hex">#FFFFFF</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#1F1010"></div><div class="swatch__label">Ink</div><div class="swatch__hex">#1F1010</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#6B1822"></div><div class="swatch__label">Bordeaux</div><div class="swatch__hex">#6B1822</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#B89859"></div><div class="swatch__label">Gold</div><div class="swatch__hex">#B89859</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#D7C9AA"></div><div class="swatch__label">Rule</div><div class="swatch__hex">#D7C9AA</div></div>
+    </div>
+    <div class="mock">
+      <div class="mock__hero">
+        <div class="mock__eyebrow">Advocate &middot; Kerala</div>
+        <h2 class="mock__headline">Justice works best when <em>it&rsquo;s understood.</em></h2>
+        <p class="mock__sub">If you have a legal question, or aren&rsquo;t sure if you do, feel free to ask.</p>
+        <form class="qbox" onsubmit="event.preventDefault()">
+          <textarea class="qbox__input" placeholder="No question is irrelevant, ask away"></textarea>
+          <div class="qbox__row"><span class="qbox__hint">Private &middot; via WhatsApp</span><button class="btn" type="submit">Send to Lakshmi &rarr;</button></div>
+        </form>
+        <div class="cta-row"><button class="btn">Primary action</button><button class="btn btn--ghost">Secondary</button></div>
+      </div>
+      <div class="practice-excerpt">
+        <div class="practice-excerpt__label">Practice &mdash; excerpt</div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">i.</span><div><div class="practice-excerpt__title">Constitutional &amp; Administrative Law</div><div class="practice-excerpt__desc">Challenging government action, enforcing fundamental rights.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">ii.</span><div><div class="practice-excerpt__title">Civil &amp; Criminal Litigation</div><div class="practice-excerpt__desc">Trial and appellate advocacy across all courts.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">iii.</span><div><div class="practice-excerpt__title">Corporate &amp; Commercial Law</div><div class="practice-excerpt__desc">Tenders, contracts, regulatory compliance.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 19 — Twilight Lavender -->
+  <section class="theme theme-19" id="theme-19">
+    <div class="theme__topline">
+      <div class="theme__num">19</div>
+      <div class="theme__name-block">
+        <div class="theme__name">Twilight <em>Lavender</em></div>
+        <div class="theme__mood">Plum &amp; warm gold &middot; dreamy</div>
+      </div>
+    </div>
+    <div class="palette">
+      <div class="swatch"><div class="swatch__chip" style="background:#E8E0EF"></div><div class="swatch__label">Background</div><div class="swatch__hex">#E8E0EF</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#F5F0F8"></div><div class="swatch__label">Surface</div><div class="swatch__hex">#F5F0F8</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#2A1A3E"></div><div class="swatch__label">Ink</div><div class="swatch__hex">#2A1A3E</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#4A2D6A"></div><div class="swatch__label">Plum</div><div class="swatch__hex">#4A2D6A</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#C2A664"></div><div class="swatch__label">Warm Gold</div><div class="swatch__hex">#C2A664</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#C9BFD7"></div><div class="swatch__label">Rule</div><div class="swatch__hex">#C9BFD7</div></div>
+    </div>
+    <div class="mock">
+      <div class="mock__hero">
+        <div class="mock__eyebrow">Advocate &middot; Kerala</div>
+        <h2 class="mock__headline">Justice works best when <em>it&rsquo;s understood.</em></h2>
+        <p class="mock__sub">If you have a legal question, or aren&rsquo;t sure if you do, feel free to ask.</p>
+        <form class="qbox" onsubmit="event.preventDefault()">
+          <textarea class="qbox__input" placeholder="No question is irrelevant, ask away"></textarea>
+          <div class="qbox__row"><span class="qbox__hint">Private &middot; via WhatsApp</span><button class="btn" type="submit">Send to Lakshmi &rarr;</button></div>
+        </form>
+        <div class="cta-row"><button class="btn">Primary action</button><button class="btn btn--ghost">Secondary</button></div>
+      </div>
+      <div class="practice-excerpt">
+        <div class="practice-excerpt__label">Practice &mdash; excerpt</div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">i.</span><div><div class="practice-excerpt__title">Constitutional &amp; Administrative Law</div><div class="practice-excerpt__desc">Challenging government action, enforcing fundamental rights.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">ii.</span><div><div class="practice-excerpt__title">Civil &amp; Criminal Litigation</div><div class="practice-excerpt__desc">Trial and appellate advocacy across all courts.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">iii.</span><div><div class="practice-excerpt__title">Corporate &amp; Commercial Law</div><div class="practice-excerpt__desc">Tenders, contracts, regulatory compliance.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 20 — Legal Pad -->
+  <section class="theme theme-20" id="theme-20">
+    <div class="theme__topline">
+      <div class="theme__num">20</div>
+      <div class="theme__name-block">
+        <div class="theme__name">Legal <em>Pad</em></div>
+        <div class="theme__mood">Canary &middot; navy ink &middot; red ruling</div>
+      </div>
+    </div>
+    <div class="palette">
+      <div class="swatch"><div class="swatch__chip" style="background:#F4EBA8"></div><div class="swatch__label">Background</div><div class="swatch__hex">#F4EBA8</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#FBF6CF"></div><div class="swatch__label">Surface</div><div class="swatch__hex">#FBF6CF</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#1A2438"></div><div class="swatch__label">Navy Ink</div><div class="swatch__hex">#1A2438</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#4A5570"></div><div class="swatch__label">Ink Soft</div><div class="swatch__hex">#4A5570</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#B0282A"></div><div class="swatch__label">Red Rule</div><div class="swatch__hex">#B0282A</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#D9CC78"></div><div class="swatch__label">Rule</div><div class="swatch__hex">#D9CC78</div></div>
+    </div>
+    <div class="mock">
+      <div class="mock__hero">
+        <div class="mock__eyebrow">Advocate &middot; High Court of Kerala</div>
+        <h2 class="mock__headline">Justice works best when <em>it&rsquo;s understood.</em></h2>
+        <p class="mock__sub">If you have a legal question, or aren&rsquo;t sure if you do, feel free to ask.</p>
+        <form class="qbox" onsubmit="event.preventDefault()">
+          <textarea class="qbox__input" placeholder="No question is irrelevant, ask away"></textarea>
+          <div class="qbox__row"><span class="qbox__hint">Private &middot; via WhatsApp</span><button class="btn" type="submit">Send to Lakshmi &rarr;</button></div>
+        </form>
+        <div class="cta-row"><button class="btn">Primary action</button><button class="btn btn--ghost">Secondary</button></div>
+      </div>
+      <div class="practice-excerpt">
+        <div class="practice-excerpt__label">Practice &mdash; excerpt</div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">i.</span><div><div class="practice-excerpt__title">Constitutional &amp; Administrative Law</div><div class="practice-excerpt__desc">Challenging government action, enforcing fundamental rights.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">ii.</span><div><div class="practice-excerpt__title">Civil &amp; Criminal Litigation</div><div class="practice-excerpt__desc">Trial and appellate advocacy across all courts.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">iii.</span><div><div class="practice-excerpt__title">Corporate &amp; Commercial Law</div><div class="practice-excerpt__desc">Tenders, contracts, regulatory compliance.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 21 — Verdigris -->
+  <section class="theme theme-21" id="theme-21">
+    <div class="theme__topline">
+      <div class="theme__num">21</div>
+      <div class="theme__name-block">
+        <div class="theme__name">Verdigris <em>Counsel</em></div>
+        <div class="theme__mood">Patina copper &middot; bronze &amp; cream</div>
+      </div>
+    </div>
+    <div class="palette">
+      <div class="swatch"><div class="swatch__chip" style="background:#E5DCC8"></div><div class="swatch__label">Background</div><div class="swatch__hex">#E5DCC8</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#FFFFFF"></div><div class="swatch__label">Surface</div><div class="swatch__hex">#FFFFFF</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#1B2A28"></div><div class="swatch__label">Ink</div><div class="swatch__hex">#1B2A28</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#547967"></div><div class="swatch__label">Verdigris</div><div class="swatch__hex">#547967</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#A57E48"></div><div class="swatch__label">Bronze</div><div class="swatch__hex">#A57E48</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#C9BD9D"></div><div class="swatch__label">Rule</div><div class="swatch__hex">#C9BD9D</div></div>
+    </div>
+    <div class="mock">
+      <div class="mock__hero">
+        <div class="mock__eyebrow">Advocate &middot; Kerala</div>
+        <h2 class="mock__headline">Justice works best when <em>it&rsquo;s understood.</em></h2>
+        <p class="mock__sub">If you have a legal question, or aren&rsquo;t sure if you do, feel free to ask.</p>
+        <form class="qbox" onsubmit="event.preventDefault()">
+          <textarea class="qbox__input" placeholder="No question is irrelevant, ask away"></textarea>
+          <div class="qbox__row"><span class="qbox__hint">Private &middot; via WhatsApp</span><button class="btn" type="submit">Send to Lakshmi &rarr;</button></div>
+        </form>
+        <div class="cta-row"><button class="btn">Primary action</button><button class="btn btn--ghost">Secondary</button></div>
+      </div>
+      <div class="practice-excerpt">
+        <div class="practice-excerpt__label">Practice &mdash; excerpt</div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">i.</span><div><div class="practice-excerpt__title">Constitutional &amp; Administrative Law</div><div class="practice-excerpt__desc">Challenging government action, enforcing fundamental rights.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">ii.</span><div><div class="practice-excerpt__title">Civil &amp; Criminal Litigation</div><div class="practice-excerpt__desc">Trial and appellate advocacy across all courts.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">iii.</span><div><div class="practice-excerpt__title">Corporate &amp; Commercial Law</div><div class="practice-excerpt__desc">Tenders, contracts, regulatory compliance.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 22 — Cinema Noir -->
+  <section class="theme theme-22" id="theme-22">
+    <div class="theme__topline">
+      <div class="theme__num">22</div>
+      <div class="theme__name-block">
+        <div class="theme__name">Cinema <em>Noir</em></div>
+        <div class="theme__mood">Black &middot; crimson &middot; cream</div>
+      </div>
+    </div>
+    <div class="palette">
+      <div class="swatch"><div class="swatch__chip" style="background:#050505"></div><div class="swatch__label">Background</div><div class="swatch__hex">#050505</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#121212"></div><div class="swatch__label">Surface</div><div class="swatch__hex">#121212</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#F2EDE2"></div><div class="swatch__label">Cream</div><div class="swatch__hex">#F2EDE2</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#A8A299"></div><div class="swatch__label">Ink Soft</div><div class="swatch__hex">#A8A299</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#B0282A"></div><div class="swatch__label">Crimson</div><div class="swatch__hex">#B0282A</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#1F1F1F"></div><div class="swatch__label">Rule</div><div class="swatch__hex">#1F1F1F</div></div>
+    </div>
+    <div class="mock">
+      <div class="mock__hero">
+        <div class="mock__eyebrow">Advocate &middot; Kerala</div>
+        <h2 class="mock__headline">Justice works best when <em>it&rsquo;s understood.</em></h2>
+        <p class="mock__sub">If you have a legal question, or aren&rsquo;t sure if you do, feel free to ask.</p>
+        <form class="qbox" onsubmit="event.preventDefault()">
+          <textarea class="qbox__input" placeholder="No question is irrelevant, ask away"></textarea>
+          <div class="qbox__row"><span class="qbox__hint">Private &middot; via WhatsApp</span><button class="btn" type="submit">Send to Lakshmi &rarr;</button></div>
+        </form>
+        <div class="cta-row"><button class="btn">Primary action</button><button class="btn btn--ghost">Secondary</button></div>
+      </div>
+      <div class="practice-excerpt">
+        <div class="practice-excerpt__label">Practice &mdash; excerpt</div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">i.</span><div><div class="practice-excerpt__title">Constitutional &amp; Administrative Law</div><div class="practice-excerpt__desc">Challenging government action, enforcing fundamental rights.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">ii.</span><div><div class="practice-excerpt__title">Civil &amp; Criminal Litigation</div><div class="practice-excerpt__desc">Trial and appellate advocacy across all courts.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">iii.</span><div><div class="practice-excerpt__title">Corporate &amp; Commercial Law</div><div class="practice-excerpt__desc">Tenders, contracts, regulatory compliance.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 23 — Indigo Block -->
+  <section class="theme theme-23" id="theme-23">
+    <div class="theme__topline">
+      <div class="theme__num">23</div>
+      <div class="theme__name-block">
+        <div class="theme__name">Indigo <em>Block</em></div>
+        <div class="theme__mood">Raw cotton &middot; indigo dye &middot; saffron</div>
+      </div>
+    </div>
+    <div class="palette">
+      <div class="swatch"><div class="swatch__chip" style="background:#ECE6D5"></div><div class="swatch__label">Background</div><div class="swatch__hex">#ECE6D5</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#FFFFFF"></div><div class="swatch__label">Surface</div><div class="swatch__hex">#FFFFFF</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#14203A"></div><div class="swatch__label">Ink</div><div class="swatch__hex">#14203A</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#1F3873"></div><div class="swatch__label">Indigo</div><div class="swatch__hex">#1F3873</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#D9931E"></div><div class="swatch__label">Saffron</div><div class="swatch__hex">#D9931E</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#D4C9B0"></div><div class="swatch__label">Rule</div><div class="swatch__hex">#D4C9B0</div></div>
+    </div>
+    <div class="mock">
+      <div class="mock__hero">
+        <div class="mock__eyebrow">Advocate &middot; Kerala &middot; Pan-India</div>
+        <h2 class="mock__headline">Justice works best when <em>it&rsquo;s understood.</em></h2>
+        <p class="mock__sub">If you have a legal question, or aren&rsquo;t sure if you do, feel free to ask.</p>
+        <form class="qbox" onsubmit="event.preventDefault()">
+          <textarea class="qbox__input" placeholder="No question is irrelevant, ask away"></textarea>
+          <div class="qbox__row"><span class="qbox__hint">Private &middot; via WhatsApp</span><button class="btn" type="submit">Send to Lakshmi &rarr;</button></div>
+        </form>
+        <div class="cta-row"><button class="btn">Primary action</button><button class="btn btn--ghost">Secondary</button></div>
+      </div>
+      <div class="practice-excerpt">
+        <div class="practice-excerpt__label">Practice &mdash; excerpt</div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">i.</span><div><div class="practice-excerpt__title">Constitutional &amp; Administrative Law</div><div class="practice-excerpt__desc">Challenging government action, enforcing fundamental rights.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">ii.</span><div><div class="practice-excerpt__title">Civil &amp; Criminal Litigation</div><div class="practice-excerpt__desc">Trial and appellate advocacy across all courts.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">iii.</span><div><div class="practice-excerpt__title">Corporate &amp; Commercial Law</div><div class="practice-excerpt__desc">Tenders, contracts, regulatory compliance.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 24 — Granite & Gold -->
+  <section class="theme theme-24" id="theme-24">
+    <div class="theme__topline">
+      <div class="theme__num">24</div>
+      <div class="theme__name-block">
+        <div class="theme__name">Granite &amp; <em>Gold</em></div>
+        <div class="theme__mood">Monochrome stone &middot; one warm pop</div>
+      </div>
+    </div>
+    <div class="palette">
+      <div class="swatch"><div class="swatch__chip" style="background:#DCD8D0"></div><div class="swatch__label">Background</div><div class="swatch__hex">#DCD8D0</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#F2EFEA"></div><div class="swatch__label">Surface</div><div class="swatch__hex">#F2EFEA</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#1A1A1A"></div><div class="swatch__label">Ink</div><div class="swatch__hex">#1A1A1A</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#4F4F4F"></div><div class="swatch__label">Ink Soft</div><div class="swatch__hex">#4F4F4F</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#C4953E"></div><div class="swatch__label">Gold</div><div class="swatch__hex">#C4953E</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#C7C4BE"></div><div class="swatch__label">Rule</div><div class="swatch__hex">#C7C4BE</div></div>
+    </div>
+    <div class="mock">
+      <div class="mock__hero">
+        <div class="mock__eyebrow">Advocate &middot; Kerala</div>
+        <h2 class="mock__headline">Justice works best when <em>it&rsquo;s understood.</em></h2>
+        <p class="mock__sub">If you have a legal question, or aren&rsquo;t sure if you do, feel free to ask.</p>
+        <form class="qbox" onsubmit="event.preventDefault()">
+          <textarea class="qbox__input" placeholder="No question is irrelevant, ask away"></textarea>
+          <div class="qbox__row"><span class="qbox__hint">Private &middot; via WhatsApp</span><button class="btn" type="submit">Send to Lakshmi &rarr;</button></div>
+        </form>
+        <div class="cta-row"><button class="btn">Primary action</button><button class="btn btn--ghost">Secondary</button></div>
+      </div>
+      <div class="practice-excerpt">
+        <div class="practice-excerpt__label">Practice &mdash; excerpt</div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">i.</span><div><div class="practice-excerpt__title">Constitutional &amp; Administrative Law</div><div class="practice-excerpt__desc">Challenging government action, enforcing fundamental rights.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">ii.</span><div><div class="practice-excerpt__title">Civil &amp; Criminal Litigation</div><div class="practice-excerpt__desc">Trial and appellate advocacy across all courts.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">iii.</span><div><div class="practice-excerpt__title">Corporate &amp; Commercial Law</div><div class="practice-excerpt__desc">Tenders, contracts, regulatory compliance.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 25 — Coffee House -->
+  <section class="theme theme-25" id="theme-25">
+    <div class="theme__topline">
+      <div class="theme__num">25</div>
+      <div class="theme__name-block">
+        <div class="theme__name">Coffee <em>House</em></div>
+        <div class="theme__mood">Espresso warmth &middot; brass &amp; cream</div>
+      </div>
+    </div>
+    <div class="palette">
+      <div class="swatch"><div class="swatch__chip" style="background:#2A1F18"></div><div class="swatch__label">Background</div><div class="swatch__hex">#2A1F18</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#3A2A22"></div><div class="swatch__label">Surface</div><div class="swatch__hex">#3A2A22</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#F2E8D7"></div><div class="swatch__label">Cream</div><div class="swatch__hex">#F2E8D7</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#B5A893"></div><div class="swatch__label">Ink Soft</div><div class="swatch__hex">#B5A893</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#C4953E"></div><div class="swatch__label">Brass</div><div class="swatch__hex">#C4953E</div></div>
+      <div class="swatch"><div class="swatch__chip" style="background:#4A3A30"></div><div class="swatch__label">Rule</div><div class="swatch__hex">#4A3A30</div></div>
+    </div>
+    <div class="mock">
+      <div class="mock__hero">
+        <div class="mock__eyebrow">Advocate &middot; Kerala</div>
+        <h2 class="mock__headline">Justice works best when <em>it&rsquo;s understood.</em></h2>
+        <p class="mock__sub">If you have a legal question, or aren&rsquo;t sure if you do, feel free to ask.</p>
+        <form class="qbox" onsubmit="event.preventDefault()">
+          <textarea class="qbox__input" placeholder="No question is irrelevant, ask away"></textarea>
+          <div class="qbox__row"><span class="qbox__hint">Private &middot; via WhatsApp</span><button class="btn" type="submit">Send to Lakshmi &rarr;</button></div>
+        </form>
+        <div class="cta-row"><button class="btn">Primary action</button><button class="btn btn--ghost">Secondary</button></div>
+      </div>
+      <div class="practice-excerpt">
+        <div class="practice-excerpt__label">Practice &mdash; excerpt</div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">i.</span><div><div class="practice-excerpt__title">Constitutional &amp; Administrative Law</div><div class="practice-excerpt__desc">Challenging government action, enforcing fundamental rights.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">ii.</span><div><div class="practice-excerpt__title">Civil &amp; Criminal Litigation</div><div class="practice-excerpt__desc">Trial and appellate advocacy across all courts.</div></div></div>
+        <div class="practice-excerpt__item"><span class="practice-excerpt__num">iii.</span><div><div class="practice-excerpt__title">Corporate &amp; Commercial Law</div><div class="practice-excerpt__desc">Tenders, contracts, regulatory compliance.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

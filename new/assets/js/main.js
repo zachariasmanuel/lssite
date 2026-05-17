@@ -98,6 +98,47 @@
     });
   });
 
+  /* ── Hero Query Form ── */
+  var queryForm = document.getElementById('query-form');
+  var queryInput = document.getElementById('query-input');
+  var WHATSAPP_NUMBER = '918129948577';
+
+  if (queryForm && queryInput) {
+    queryForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var text = queryInput.value.trim();
+      if (!text) {
+        queryInput.focus();
+        return;
+      }
+      var url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(text);
+      window.open(url, '_blank', 'noopener,noreferrer');
+      queryInput.value = '';
+    });
+  }
+
+  /* ── Hide floating WhatsApp pill over sections with right-aligned content ── */
+  var whatsappFloat = document.querySelector('.whatsapp-float');
+  var floatBlockerIds = ['about', 'contact'];
+
+  if (whatsappFloat && 'IntersectionObserver' in window) {
+    var blocked = {};
+    var floatObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          blocked[entry.target.id] = entry.isIntersecting;
+        });
+        var anyBlocked = Object.values(blocked).some(Boolean);
+        whatsappFloat.classList.toggle('is-hidden', anyBlocked);
+      },
+      { rootMargin: '-30% 0px -30% 0px' }
+    );
+    floatBlockerIds.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) floatObserver.observe(el);
+    });
+  }
+
   /* ── Scroll Reveal ── */
   const reveals = document.querySelectorAll('.reveal');
 
