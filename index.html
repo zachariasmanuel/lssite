@@ -1,144 +1,280 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="assets/ico/favicon.png">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A new chapter for the chambers of Lakshmi Sreedhar, Advocate — our new office opens 17 June 2026, 8:30 AM IST, in Kochi, Kerala.">
+  <meta name="author" content="Lakshmi Sreedhar">
+  <meta property="og:title" content="Our new office opens soon — Lakshmi Sreedhar, Advocate">
+  <meta property="og:description" content="A new chapter begins. The new office opens 17 June 2026 · 8:30 AM IST · Kochi, Kerala.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.lakshmisreedhar.com">
+  <meta name="theme-color" content="#241027">
 
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <title>A new chapter · Lakshmi Sreedhar, Advocate</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-42601089-4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-42601089-4');
+  </script>
 
-    <title> Lakshmi Sreedhar </title>
+  <style>
+    :root{
+      --ink:#1A0E1E;
+      --plum:#2E1F35;
+      --aubergine:#5C2A4F;
+      --gold:#CBA46A;
+      --gold-soft:#E4CEA3;
+      --paper:#F6EFE6;
+      --paper-mute:rgba(246,239,230,0.66);
+      --paper-faint:rgba(246,239,230,0.4);
+      --line:rgba(203,164,106,0.28);
+      --serif:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+      --sans:'Inter',system-ui,-apple-system,sans-serif;
+      --ease:cubic-bezier(0.22,0.61,0.21,1);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{-webkit-text-size-adjust:100%}
+    body{
+      font-family:var(--sans);
+      color:var(--paper);
+      background:var(--ink);
+      min-height:100vh;
+      min-height:100dvh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow-x:hidden;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+      position:relative;
+      padding:48px 22px;
+    }
+    /* ambient gradient backdrop */
+    .bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+    .bg::before,.bg::after{
+      content:'';position:absolute;border-radius:50%;filter:blur(80px);opacity:0.5;
+    }
+    .bg::before{
+      width:60vw;height:60vw;top:-18vw;right:-12vw;
+      background:radial-gradient(circle,var(--aubergine),transparent 68%);
+      animation:drift1 16s var(--ease) infinite alternate;
+    }
+    .bg::after{
+      width:52vw;height:52vw;bottom:-20vw;left:-14vw;
+      background:radial-gradient(circle,#3a2540,transparent 68%);
+      animation:drift2 20s var(--ease) infinite alternate;
+    }
+    @keyframes drift1{from{transform:translate(0,0)}to{transform:translate(-4vw,4vw)}}
+    @keyframes drift2{from{transform:translate(0,0)}to{transform:translate(5vw,-3vw)}}
 
-    <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    /* faint monogram watermark */
+    .watermark{
+      position:fixed;z-index:0;font-family:var(--serif);font-style:italic;
+      font-size:min(90vh,80vw);line-height:.8;color:var(--gold);opacity:.04;
+      top:50%;left:50%;transform:translate(-50%,-46%);pointer-events:none;user-select:none;
+    }
 
-    <!-- Custom styles for this template -->
-    <link href="assets/css/main.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    .card{position:relative;z-index:1;width:100%;max-width:920px;text-align:center}
 
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/modernizr.custom.js"></script>
+    .eyebrow{
+      font-family:var(--sans);font-size:.72rem;font-weight:600;letter-spacing:.28em;
+      text-transform:uppercase;color:var(--gold);
+      display:inline-flex;align-items:center;gap:14px;
+    }
+    .eyebrow::before,.eyebrow::after{content:'';width:30px;height:1px;background:var(--line)}
 
+    .title{
+      font-family:var(--serif);font-weight:500;line-height:1.02;letter-spacing:-.01em;
+      font-size:clamp(2.6rem,8vw,5.6rem);margin:26px 0 0;color:var(--paper);
+    }
+    .title em{font-style:italic;color:var(--gold)}
 
+    .lede{
+      font-family:var(--serif);font-style:italic;font-size:clamp(1.15rem,2.4vw,1.6rem);
+      color:var(--paper-mute);margin:22px auto 0;max-width:34ch;line-height:1.45;
+    }
 
-    <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=EB+Garamond' rel='stylesheet' type='text/css'>
+    .when{
+      margin:30px auto 0;display:inline-flex;align-items:center;gap:14px;flex-wrap:wrap;
+      justify-content:center;
+      font-size:.82rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+      color:var(--gold-soft);
+      border:1px solid var(--line);border-radius:999px;padding:11px 22px;
+      background:rgba(203,164,106,0.05);
+    }
+    .when .dot{width:5px;height:5px;border-radius:50%;background:var(--gold);flex:0 0 auto}
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="assets/js/html5shiv.js"></script>
-      <script src="assets/js/respond.min.js"></script>
-    <![endif]-->
+    /* countdown */
+    .countdown{
+      margin:54px auto 0;display:flex;justify-content:center;align-items:flex-start;
+      gap:clamp(14px,4vw,46px);
+    }
+    .unit{display:flex;flex-direction:column;align-items:center;min-width:0}
+    .unit__val{
+      font-family:var(--serif);font-weight:500;line-height:.95;
+      font-size:clamp(3rem,12vw,7rem);color:var(--paper);
+      font-variant-numeric:tabular-nums;letter-spacing:-.01em;
+      display:inline-block;
+    }
+    .unit__val.tick{animation:tick .5s var(--ease)}
+    @keyframes tick{0%{opacity:.25;transform:translateY(-8px)}100%{opacity:1;transform:none}}
+    .unit__label{
+      margin-top:12px;font-size:.66rem;font-weight:600;letter-spacing:.22em;
+      text-transform:uppercase;color:var(--paper-faint);
+    }
+    .sep{
+      font-family:var(--serif);font-size:clamp(2.4rem,9vw,5rem);color:var(--gold);
+      opacity:.5;line-height:.95;align-self:flex-start;margin-top:.1em;
+    }
+    @media(max-width:560px){ .sep{display:none} .countdown{gap:18px} }
+
+    /* opened state */
+    .opened{display:none;margin-top:48px}
+    .opened__mark{
+      width:74px;height:74px;border-radius:50%;border:1px solid var(--gold);
+      display:flex;align-items:center;justify-content:center;margin:0 auto 24px;
+      color:var(--gold);animation:pop .7s var(--ease);
+    }
+    .opened__mark svg{width:34px;height:34px}
+    @keyframes pop{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:none}}
+    body.is-open .countdown,body.is-open .when{display:none}
+    body.is-open .opened{display:block}
+
+    .foot{
+      margin-top:54px;display:flex;flex-direction:column;align-items:center;gap:20px;
+    }
+    .place{
+      font-family:var(--serif);font-size:1.18rem;color:var(--paper-mute);
+    }
+    .place b{color:var(--paper);font-weight:500}
+    .cta{
+      display:inline-flex;align-items:center;gap:9px;
+      font-family:var(--sans);font-size:.92rem;font-weight:500;letter-spacing:.01em;
+      color:var(--ink);background:var(--gold);
+      padding:13px 26px;border-radius:999px;
+      transition:transform .3s var(--ease),background .3s var(--ease),box-shadow .3s var(--ease);
+      text-decoration:none;
+    }
+    .cta:hover{background:var(--gold-soft);transform:translateY(-2px);box-shadow:0 16px 36px -16px rgba(203,164,106,.7)}
+    .cta svg{width:17px;height:17px}
+
+    .sig{
+      margin-top:48px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+      color:var(--paper-faint);
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      .bg::before,.bg::after{animation:none}
+      .unit__val.tick{animation:none}
+    }
+  </style>
 </head>
+<body>
 
-<body data-spy="scroll" data-offset="0" data-target="#theMenu">
+  <div class="bg" aria-hidden="true"></div>
+  <div class="watermark" aria-hidden="true">L</div>
 
-    <!-- Menu -->
-    <nav class="menu" id="theMenu">
-        <div class="menu-wrap">
-            <h1 class="logo"><a href="index.html#home">Menu</a></h1>
-            <i class="icon-remove menu-close"></i>
-            <a href="#home" class="smoothScroll">Home</a>
-            <a href="#contact" class="smoothScroll">Contact</a>
-            <a href="https://www.facebook.com/lakshmi.shiva.928"><i class="icon-facebook"></i></a>
-            <a href="https://twitter.com/lololikka"><i class="icon-twitter"></i></a>
-            <a href="mailto:adv@lakshmisreedhar.com"><i class="icon-envelope"></i></a>
-        </div>
+  <main class="card">
+    <p class="eyebrow">Lakshmi Sreedhar &middot; Advocate</p>
 
-        <!-- Menu button -->
-        <div id="menuToggle"><i class="icon-reorder"></i></div>
-    </nav>
+    <h1 class="title">A new chapter <em>begins.</em></h1>
+    <p class="lede">The doors of our new chambers are about to open.</p>
 
-
-
-    <!-- ========== HEADER SECTION ========== -->
-    <section id="home" name="home"></section>
-    <div id="headerwrap">
-        <div class="container">
-
-            <br>
-            <div class="row">
-                <h1>Lakshmi Sreedhar</h1>
-                <br>
-                <h3> Lawyer | Traveller </h3>
-                <br>
-                <br>
-                <div class="col-lg-6 col-lg-offset-3">
-                </div>
-            </div>
-        </div>
-        <!-- /container -->
-    </div>
-    <!-- /headerwrap -->
-
-
-
-    <!-- 	<!-- ========== ABOUT SECTION ========== -->
-    <!-- <section id="about" name="about"></section>
-	<div id="f">
-		<div class="container">
-			<div class="row">
-				<h3>ABOUT ME</h3>
-				<p class="centered"><i class="icon icon-circle"></i><i class="icon icon-circle"></i><i class="icon icon-circle"></i></p> -->
-
-    <!-- INTRO INFORMATIO-->
-    <!-- 	<div class="col-lg-6 col-lg-offset-3">
-					<p>A full time theme crafter based in Madrid, Spain. I love designing beautiful, clean and user-friendly interfaces for websites.</p>
-					<p>My passion is turning good ideas and products into eye-catching sites.</p>
-					<p>Sometimes I blog about design and web trends. Also I share links and my thoughts on <a href="http://twitter.com/BlackTie_co">Twitter</a>. Need a free handsome bootstrap theme? <a href="http://blacktie.co">Done!</a></p>
-					<p>I'm available for freelance jobs. Contact me now.</p>
-				</div>								
-			</div> -->
-    <!-- </div>/container
-	</div> -->
-    <!-- /f -->
-    <!-- -->
-
-
-
-
-    <!-- ========== CONTACT SECTION ========== -->
-    <section id="contact" name="contact"></section>
-    <div id="f">
-        <div class="container">
-            <div class="row">
-                <h3>CONTACT ME</h3>
-                <p class="centered"><i class="icon icon-circle"></i><i class="icon icon-circle"></i><i class="icon icon-circle"></i></p>
-
-                <div class="col-lg-6 col-lg-offset-3">
-                    <p>1st Floor, Metro Plaza,<br/>Market Road, North End,<br/>Kochi-18, Kerala,<br/>India</p>
-                    <p>adv@lakshmisreedhar.com</p>
-                </div>
-            </div>
-        </div>
+    <div class="when" aria-label="Opening date and time">
+      <span>17 June 2026</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span>8:30 AM IST</span>
     </div>
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-42601089-4"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
+    <!-- Countdown -->
+    <div class="countdown" id="countdown" role="timer" aria-live="polite" aria-label="Time remaining until the new office opens">
+      <div class="unit"><span class="unit__val" id="days">--</span><span class="unit__label">Days</span></div>
+      <span class="sep" aria-hidden="true">:</span>
+      <div class="unit"><span class="unit__val" id="hours">--</span><span class="unit__label">Hours</span></div>
+      <span class="sep" aria-hidden="true">:</span>
+      <div class="unit"><span class="unit__val" id="minutes">--</span><span class="unit__label">Minutes</span></div>
+      <span class="sep" aria-hidden="true">:</span>
+      <div class="unit"><span class="unit__val" id="seconds">--</span><span class="unit__label">Seconds</span></div>
+    </div>
 
-        function gtag() {
-            dataLayer.push(arguments);
+    <!-- Shown when the countdown reaches zero -->
+    <div class="opened" id="opened">
+      <div class="opened__mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      </div>
+      <h2 class="title" style="font-size:clamp(2rem,6vw,3.4rem);margin-top:0">We&rsquo;re <em>open.</em> Welcome.</h2>
+      <p class="lede">The new chambers are now open. We look forward to meeting you.</p>
+    </div>
+
+    <div class="foot">
+      <p class="place"><b>Kochi</b> &middot; Kerala &middot; India</p>
+      <a class="cta" href="https://wa.me/918129948577" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+        Enquire on WhatsApp
+      </a>
+    </div>
+
+    <p class="sig">Enrolled with the Bar Council of Kerala</p>
+  </main>
+
+  <script>
+    (function(){
+      'use strict';
+      // 17 June 2026, 8:30 AM IST (UTC+05:30)
+      var target = new Date('2026-06-17T08:30:00+05:30').getTime();
+
+      var els = {
+        days:    document.getElementById('days'),
+        hours:   document.getElementById('hours'),
+        minutes: document.getElementById('minutes'),
+        seconds: document.getElementById('seconds')
+      };
+      var prev = { days:null, hours:null, minutes:null, seconds:null };
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function pad(n){ return (n < 10 ? '0' : '') + n; }
+
+      function set(key, value){
+        if (prev[key] === value) return;
+        prev[key] = value;
+        var el = els[key];
+        el.textContent = value;
+        if (reduce) return;
+        el.classList.remove('tick');
+        void el.offsetWidth;          // restart the animation
+        el.classList.add('tick');
+      }
+
+      function render(){
+        var diff = target - Date.now();
+        if (diff <= 0){
+          document.body.classList.add('is-open');
+          set('days','00'); set('hours','00'); set('minutes','00'); set('seconds','00');
+          clearInterval(timer);
+          return;
         }
-        gtag('js', new Date());
+        var s = Math.floor(diff / 1000);
+        var days    = Math.floor(s / 86400);
+        var hours   = Math.floor((s % 86400) / 3600);
+        var minutes = Math.floor((s % 3600) / 60);
+        var seconds = s % 60;
+        set('days',    pad(days));
+        set('hours',   pad(hours));
+        set('minutes', pad(minutes));
+        set('seconds', pad(seconds));
+      }
 
-        gtag('config', 'UA-42601089-4');
-    </script>
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="assets/js/classie.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/smoothscroll.js"></script>
-    <script src="assets/js/main.js"></script>
+      render();
+      var timer = setInterval(render, 1000);
+    })();
+  </script>
 </body>
-
 </html>
