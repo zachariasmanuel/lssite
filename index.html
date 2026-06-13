@@ -75,12 +75,16 @@
     @keyframes drift1{from{transform:translate(0,0)}to{transform:translate(-4vw,4vw)}}
     @keyframes drift2{from{transform:translate(0,0)}to{transform:translate(5vw,-3vw)}}
 
-    /* faint monogram watermark */
+    /* faint interlocked LS monogram watermark */
     .watermark{
-      position:fixed;z-index:0;font-family:var(--serif);font-style:italic;
-      font-size:min(90vh,80vw);line-height:.8;color:var(--gold);opacity:.04;
-      top:50%;left:50%;transform:translate(-50%,-46%);pointer-events:none;user-select:none;
+      position:fixed;z-index:0;top:50%;left:50%;
+      width:min(86vw,82vh);height:auto;
+      transform:translate(-50%,-49%);
+      opacity:.06;pointer-events:none;user-select:none;
     }
+    .watermark text{font-family:var(--serif);font-weight:500}
+    .watermark .w-l,.watermark .w-s{fill:var(--gold)}
+    .watermark .w-shadow{fill:var(--ink)}
 
     .card{position:relative;z-index:1;width:100%;max-width:920px;text-align:center}
 
@@ -180,7 +184,16 @@
 <body>
 
   <div class="bg" aria-hidden="true"></div>
-  <div class="watermark" aria-hidden="true">L</div>
+  <svg class="watermark" viewBox="0 0 150 124" aria-hidden="true">
+    <!-- soft depth shadow behind the monogram -->
+    <g transform="translate(2.4,3)" opacity="0.55">
+      <text class="w-shadow" x="94" y="99" text-anchor="middle" font-size="138">S</text>
+      <text class="w-shadow" x="58" y="99" text-anchor="middle" font-size="138">L</text>
+    </g>
+    <!-- S sits behind, L weaves in front (dominant serif L) -->
+    <text class="w-s" x="94" y="98" text-anchor="middle" font-size="138">S</text>
+    <text class="w-l" x="58" y="98" text-anchor="middle" font-size="138">L</text>
+  </svg>
 
   <main class="card">
     <p class="eyebrow">Lakshmi Sreedhar &middot; Advocate</p>
